@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>l4n</title>
+    <link rel="stylesheet" href="stylesheet.css" type="text/css">
+  </head>
+  <body>
+    <div id="header"></div>
+    <div class="mainContainer">
+      <div id="myLobbies"></div>
+      <div id="openLobbies"></div>
+      <div id="availableServers"></div>
+      <div id="popup"></div>
+      <div id="voiceChannels"></div>
+    </div>
+<pre>
+    +--* ding *------------------------------------------------------------+
+    |                                                                      |
+    |                            GAME READY                                |
+    |  [JOIN NOW](steam://connect/<IP or DNS name>[:<port>][/<password>])  |
+    |                           [countdown]                                |
+    |                                                                      |
+    +----------------------------------------------------------------------+
+- https://developer.valvesoftware.com/wiki/Steam_browser_protocol
+- join = disable countdown
+- countdown over = invite next
+
+
++------------------------------------------------------------------------------+
+| == CUSTOM LOBBY ==                                                           |
++------------------------------------------------------------------------------+
+|            Game [___________________________]                                |
+|      Lobby Name [___________________________]                                |
+|    Max. Players [___________________________]                                |
+|  Voice Channels [___________________________]                                |
+|                                                                              |
+|                 Start Conditions                                             |
+|            Time [___________________________]                                |
+|    Min. Players [___________________________]                                |
+|                                                                              |
+|    Instructions [                           ]                                |
+|                 [                           ]                                |
+|                 [                           ]                                |
+|                 [                           ]                                |
+|                 [___________________________]                                |
+|                                                              [ OPEN LOBBY ]  |
++------------------------------------------------------------------------------+
+
+
+    +--* ding *------------------------------------------------------------+
+    |                                                                      |
+    |                          ENOUGH PLAYERS                              |
+    |            START THE SERVER AND NOTIFY THE OTHER PLAYERS             |
+    |                   [ TELL THEM THEY SHOULD JOIN ]                     |
+    |                                                                      |
+    +----------------------------------------------------------------------+
+
++------------------------------------------------------------------------------+
+| == CUSTOM LOBBY ==                                                           |
++------------------------------------------------------------------------------+
+
+</pre>
+    <script src="script.js"></script>
+  </body>
+</html>
