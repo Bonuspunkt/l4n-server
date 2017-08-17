@@ -4,20 +4,31 @@ import './Header.styl'
 
 const User = ({ user }) => {
     if (user) {
-        return (<a href="/profile" style={{ float: 'right' }}>{ user }</a>);
+        return (
+            <div style={{ float: 'right' }}>
+                <a href="/profile">{ user } </a>
+                <form method="POST" action="/logout">
+                    <button type="submit">logout</button>
+                </form>
+            </div>
+        );
     }
-    return (<a href="/register">register</a>);
+    return (
+        <div style={{ float: 'right' }}>
+            <a href="/register">register</a>
+        </div>
+    );
 }
 
-const Header = ({ lanName, user }) => {
+const Header = (props) => {
+    const { lanName } = props;
     const href = `https://l4n.at/${ lanName }/`;
     const name = href.slice(8);
-
-    const
 
     return (
         <header>
             <a href={ href }>{ name }</a>
+            <User { ...props } />
         </header>
     );
 }

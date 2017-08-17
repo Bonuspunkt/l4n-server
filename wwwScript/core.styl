@@ -15,13 +15,19 @@ a:hover
     color: #ff0
     text-decoration: underline
 
+input, textarea
+    background: #000
+    color: #fff
+    padding: .2rem
+    border: .1rem solid #080
+
 button
     border: 0
     background-color: #080
     color: #fff
     font-size: 1rem
 
-.mainContainer
+#main
     margin: 4rem auto 0 auto;
     max-width: 50rem
 
@@ -35,3 +41,27 @@ table
 
 .noPad
     padding: 0
+
+
+form
+    label
+        margin: .5rem
+        display: block
+        width: 100%
+
+        span
+            padding-right: 1rem
+            text-align: right
+            vertical-align: top
+            width: 10rem;
+            display: inline-block
+
+        input, textarea, .commonMark
+            display: inline-block
+            width: 35rem
+
+        textarea
+            font-family: sans-serif
+            font-size: 1rem
+            height: 5rem
+
