@@ -1,9 +1,11 @@
 import React, { PureComponent } from 'react'
 
+import Login from './Login';
+import CustomLobby from './CustomLobby';
+
 import MyLobbies from './MyLobbies';
 import OpenLobbies from './OpenLobbies';
 import AvailableServers from './AvailableServers';
-import CustomLobby from './CustomLobby';
 
 class Router extends PureComponent {
     render() {
@@ -11,26 +13,29 @@ class Router extends PureComponent {
         const { url } = props;
 
         switch (url) {
+
+            case '/login':
+                return (<Login { ...props } />)
+
+            case '/newLobby/custom':
+                return (<CustomLobby { ...props } />);
+
+            case '/newLobby/:id':
+                return ('oh oh')
+
             case '/':
-            /*
                 return (
                     <div>
                         <MyLobbies { ...props } />
                         <OpenLobbies { ...props } />
                         <AvailableServers { ...props } />
-                        <a href="/customLobby">create custom lobby</a>
-                    </div>
-                );
-*/
-            case '/customLobby':
-                return (
-                    <div>
-                        <CustomLobby { ...props } />
+                        <a className="button" href="/newLobby/custom">create custom lobby</a>
                     </div>
                 );
 
+            default:
+                return 'no route';
         }
-
     }
 }
 

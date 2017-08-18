@@ -19,7 +19,7 @@ const CustomLobby = (props) => {
             </label>
             <label>
                 <span>Max. Players</span>
-                <input type="text" name="max" />
+                <input type="number" name="maxPlayer" />
             </label>
             <label>
                 <span>Voice Channels</span>
@@ -33,14 +33,14 @@ const CustomLobby = (props) => {
             </label>
             <label>
                 <span>Min. Players</span>
-                <input type="text" name="minPlayers" />
+                <input type="number" name="minPlayers" />
             </label>
+
+            <h4>Misc</h4>
             <label>
                 <span>Notes</span>
                 <textarea name="notes" value={ notes } />
             </label>
-
-            <h4>Misc</h4>
             <label>
                 <span>Notes Preview</span>
                 <CommonMark text={ notes } />

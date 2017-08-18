@@ -27,7 +27,7 @@ module.exports = {
         }, {
             test: /\.styl$/,
             use: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
+                fallback: 'universal-style-loader',
                 use: [
                     'css-loader',
                     'stylus-loader',
@@ -46,8 +46,7 @@ module.exports = {
         contentBase: path.resolve(__dirname, 'wwwRoot'),
         port: 8081,
         proxy: {
-            "/api": "http://localhost:8080/api",
-            "/static": "http://localhost:8080/static",
+            "/": "http://localhost:8080/",
         }
     },
 };

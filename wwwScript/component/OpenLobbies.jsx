@@ -1,38 +1,52 @@
 import React from 'react';
+import LobbyDisplay from './LobbyDisplay';
 
 const OpenLobbies = (props) => {
-    const openLobbies = Array.from({ length: 10 })
-        .map((lobby, i) => ({ name: i, players: i + 1, maxPlayers: 2 + 2 * i % 16 }));
+    const openLobbies = [{
+        id: 1,
+        game: { steamId: 730, name: 'CS:GO' },
+        name: 'rl simulator 2020',
+        start: undefined,
+        minPlayers: 2,
+        maxPlayers: 24,
+        players: [{
+            id: 1,
+            name: 'Bonus'
+        }, {
+            id: 2,
+            name: 'Punkt'
+        }],
+        voice: 2,
+        misc: {}
+    }, {
+        id: 2,
+        game: { steamId: 2310, name: 'Quake' },
+        name: 'coop point & click adventure',
+        start: '2017-09-01T00:00:00Z',
+        minPlayers: 1,
+        maxPlayers: 4,
+        players: [{
+            id: 1,
+            name: 'Bonus'
+        }, {
+            id: 2,
+            name: 'Punkt'
+        }],
+        voice: 1,
+        misc: {}
+    }];
 
     return (
         <article>
             <h2>Open Lobbies</h2>
             <table>
-                <thead>
-                    <tr>
-                        <th>Game</th>
-                        <th>Lobby name</th>
-                        <th>Status</th>
-                        <th />
-                    </tr>
-                </thead>
                 <tbody>
-                    { openLobbies.map(lobby => <OpenLobby key={ lobby.name } { ...lobby } />) }
+                    { openLobbies.map(lobby => <LobbyDisplay key={ lobby.name } { ...lobby } />) }
                 </tbody>
             </table>
         </article>
     );
 }
 
-const OpenLobby = (props) => {
-    return (
-        <tr>
-            <td className="noPad"><img src="." alt={ 'game name' } /></td>
-            <td>Lobby { props.name }</td>
-            <td>{ props.players } / { props.maxPlayers }</td>
-            <td><button type="button">{ props.maxPlayers > props.players ? 'join' : 'queue' }</button></td>
-        </tr>
-    )
-}
 
 export default OpenLobbies;

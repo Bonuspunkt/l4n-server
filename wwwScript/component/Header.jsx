@@ -1,12 +1,13 @@
 import React from 'react';
-
-import './Header.styl'
+if (process.env.BROWSER) {
+    require('./Header.styl');
+}
 
 const User = ({ user }) => {
     if (user) {
         return (
             <div style={{ float: 'right' }}>
-                <a href="/profile">{ user } </a>
+                <a href="/profile">{ user.name }</a>
                 <form method="POST" action="/logout">
                     <button type="submit">logout</button>
                 </form>
@@ -15,7 +16,7 @@ const User = ({ user }) => {
     }
     return (
         <div style={{ float: 'right' }}>
-            <a href="/register">register</a>
+            <a href="/login">login</a>
         </div>
     );
 }

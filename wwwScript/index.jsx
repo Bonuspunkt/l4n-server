@@ -5,6 +5,7 @@ import Store from 'repatch';
 
 import Header from './component/Header';
 import Router from './component/Router';
+import GameReady from './component/GameReady';
 
 import './core.styl'
 
@@ -13,6 +14,7 @@ const headerEl = document.getElementById('header');
 const mainEl = document.getElementById('main')
 const popupEl = document.getElementById('popup');
 
+/*
 const render = (data) => {
 
     ReactDOM.render(<Header { ...data } />, headerEl);
@@ -34,14 +36,15 @@ store.dispatch(state => ({
     ...state,
     url: '/',
     lanName: 'vulkan44',
-    user: 'Bonuspunkt'
+    user: { id: 5, name: 'Bonuspunkt' }
 }));
 
 
 document.addEventListener('click', e => {
     let el = e.target;
+    while (el && el.tagName !== 'A') { el = el.parentNode; }
+    if (!el) { return; }
 
-    if (el.tagName !== 'A') { return; }
     e.stopPropagation();
     e.preventDefault();
 
@@ -50,3 +53,8 @@ document.addEventListener('click', e => {
     store.dispatch(state => ({ ...state, url: pathname }));
     history.pushState(pathname, 'l4n', pathname);
 });
+window.addEventListener('popstate', e => {
+    const { pathname } = document.location;
+    store.dispatch(state => ({ ...state, url: pathname }))
+});
+*/

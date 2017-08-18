@@ -1,43 +1,58 @@
+@require 'definitions'
+
 html, body
     margin: 0
     padding: 0
 
-    background: #000
-    color: #fff
+    background: $background
+    color: $text
 
     font-family: sans-serif
 
-a, a:visited
-    color: #fff
+body
+    margin: 5rem auto 2rem
+    max-width: 50rem
+
+footer
+    border-top: .01rem solid $text
+    margin-top: 2rem
+    text-align: center
+    font-size: small
+    font-family: monospace
+
+a, a:visited, a:hover
+    color: $text
     text-decoration: none
 
 a:hover
-    color: #ff0
     text-decoration: underline
 
 input, textarea
-    background: #000
-    color: #fff
+    background: $background
+    color: $text
     padding: .2rem
     border: .1rem solid #080
 
-button
+button, .button
     border: 0
-    background-color: #080
-    color: #fff
+    background-color: $color-bg
+    color: $color-text
     font-size: 1rem
+    padding: .5rem
 
-#main
-    margin: 4rem auto 0 auto;
-    max-width: 50rem
+.button
+    display: inline-block
 
 table
     width: 100%
+    border-collapse: collapse
 
-    tr:nth-child(odd)
-        background: #444
+    tbody tr:nth-child(odd)
+        background: $background-alt
     th, td
         padding: .5rem
+        overflow: hidden
+        text-overflow: ellipsis
 
 .noPad
     padding: 0
@@ -48,6 +63,12 @@ form
         margin: .5rem
         display: block
         width: 100%
+
+        & > *
+            padding: .5rem
+            line-height: 1rem
+            font-size: 1rem
+            font-family: sans-serif
 
         span
             padding-right: 1rem
@@ -61,7 +82,4 @@ form
             width: 35rem
 
         textarea
-            font-family: sans-serif
-            font-size: 1rem
             height: 5rem
-

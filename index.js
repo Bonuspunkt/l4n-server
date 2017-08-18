@@ -25,5 +25,14 @@ const scanner = new UdpScanner({
 scanner.on('found', url => mediator.addClient(url))
 scanner.start();
 
-const httpServer = require('./lib/httpServer');
+const Store = new require('repatch').default;
+const store = new Store({
+    lanName: 'vulkan44'
+});
+
+const settings = require('./settings');
+const httpServer = require('./lib/httpServer')({
+    ...settings,
+    store,
+});
 httpServer.listen(8080);
