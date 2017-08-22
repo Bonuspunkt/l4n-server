@@ -19,5 +19,13 @@ module.exports = {
         clientID: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
         clientSecret: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
         region: 'eu',
+    },
+
+    //
+    mediator: {
+        ca: fs.readFileSync('ca-crt.pem'),
+        key: fs.readFileSync('client1-key.pem'),
+        cert: fs.readFileSync('client1-crt.pem'),
+        rejectUnauthorized: true,
     }
 };

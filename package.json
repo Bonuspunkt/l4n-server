@@ -48,6 +48,5 @@
     "watch": "webpack -d -w",
     "test": "tap lib/**.test.js"
   },
-  "author": "Bonuspunkt",
-  "license": "ISC"
+  "author": "Bonuspunkt"
 }
