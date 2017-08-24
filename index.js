@@ -1,38 +1,34 @@
 #!/usr/bin/env node
 const os = require('os');
 
-const ClientMediator = require('./lib/clientMediator');
-const mediator = new ClientMediator({
-    key: null,
-    cert: null,
-    ca: null,
-});
+const Resolver = require('./lib/resolver');
+const { register, resolve } = new Resolver();
 
-const interfaces = os.networkInterfaces();
-const broadcastIPs = Object.keys(interfaces)
-    .map(key => interfaces[key])
-    .reduce((prev, curr) => prev.concat(curr))
-    .filter(interface => interface.family === 'IPv4' && !interface.internal)
-    .map(interface => interface.address.replace(/\.\d+$/, '.255'));
+register('handleScannerFound', require('./glue/handleScannerFound'))
+
+register('settings', () => require('./settings'));
+
+const HttpsClient = require('./lib/httpsClient');
+const httpsClient = new HttpsClient(resolve);
+register('httpsClient', () => httpsClient);
 
 const UdpScanner = require('./lib/udpScanner');
-const scanner = new UdpScanner({
-    broadcastIPs,
-    hostPort: 20000,
-    targetPort: 19999,
-    scanInterval: 3e4
-});
-scanner.on('found', url => mediator.addClient(url))
+const scanner = new UdpScanner(resolve);
+scanner.on('found', resolve('handleScannerFound'));
 scanner.start();
 
-const Store = new require('repatch').default;
-const store = new Store({
-    lanName: 'vulkan44'
+const Store = new require('./lib/Store');
+const publicStore = new Store('public', {
+    lanName: 'vulkan44',
+    lobbies: [],
+    providers: [],
 });
+register('publicStore', () => publicStore);
 
-const settings = require('./settings');
-const httpServer = require('./lib/httpServer')({
-    ...settings,
-    store,
+const privateStore = new Store('private', {
+    providers: []
 });
+register('privateStore', () => privateStore);
+
+const httpServer = require('./lib/httpServer')(resolve);
 httpServer.listen(8080);

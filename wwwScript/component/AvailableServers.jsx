@@ -3,22 +3,12 @@ import React from 'react';
 import GameDisplay from './GameDisplay';
 
 const AvailableServers = (props) => {
-    const servers = [{
-        provider: 'l4n.at',
-        game: { id: 1, steamId: 440, name: 'TF2' }
-    }, {
-        provider: 'l4n.at',
-        game: { id: 2, steamId: 730, name: 'CS:GO' }
-    }, {
-        provider: 'l4n.at',
-        game: { id: 3, steamId: 550, name: 'L4D2' }
-    }, {
-        provider: 'l4n.at',
-        game: { id: 4, steamId: 328070, name: 'Reflex Arena' }
-    }, {
-        provider: 'l4n.at',
-        game: { id: 4, steamId: 2310, name: 'Quake' }
-    }];
+    const { providers } = props;
+    const servers = providers
+        .map(provider => provider.games.map(game => ({ provider: provider.name, game })))
+        .reduce((prev, curr) => prev.concat(curr));
+
+    console.log(servers)
 
     return (
         <article>
@@ -38,7 +28,7 @@ const AvailableServer = ({ provider, game }) => {
             <td>{ provider }</td>
             <td className="noPad"><GameDisplay { ...game } /></td>
             <td>{ game.name }</td>
-            <td><a className="button" href={ `/lobby/create/${ game.id }` }>open lobby</a></td>
+            <td><a className="button" href={ `/provider/${ provider }/game/${ game.id }` }>open lobby</a></td>
         </tr>
     );
 };

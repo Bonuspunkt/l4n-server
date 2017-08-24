@@ -1,6 +1,7 @@
 import React from 'react';
 
 import DefaultLayout from './layout/Default';
+import CsrfToken from '../component/CsrfToken'
 
 const Login = (props) => {
     const { csrfToken } = props;
@@ -14,7 +15,7 @@ const Login = (props) => {
                 <a href="/auth/bnet">Sign in through battle.net</a>
             </div>
             <form action="/auth/local" method="POST">
-                <input type="hidden" name="_csrf" value={ csrfToken } />
+                <CsrfToken { ...props } />
                 <label>
                     <span>Username</span>
                     <input type="text" name="username"/>
@@ -28,7 +29,7 @@ const Login = (props) => {
 
             <h3>register</h3>
             <form action="/register" method="POST">
-                <input type="hidden" name="_csrf" value={ csrfToken } />
+                <CsrfToken { ...props } />
                 <label>
                     <span>Username</span>
                     <input type="text" name="username"/>
