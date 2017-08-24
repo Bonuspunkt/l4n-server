@@ -5,10 +5,7 @@ import GameDisplay from '../component/GameDisplay';
 import LobbyDefinition from '../component/LobbyDefinition';
 
 const CreateLobby = (props) => {
-    const { params, providers } = props;
-
-    const provider = providers.find(p => p.name === params.provider);
-    const game = provider.games.find(g => g.id === params.game);
+    const { params, provider, game } = props;
 
     return (
         <DefaultLayout { ...props } title={ 'Create Lobby' }>
