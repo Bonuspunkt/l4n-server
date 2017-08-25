@@ -1,10 +1,8 @@
-import React from './react'
+import React from 'react'
 
-const UserDisplay = ({userId, users}) => {
-    const user = users.find(user => user.id === userId)
-
+const UserDisplay = ({ user }) => {
     return (
-        <a href={ `/user/${userId}` }>
+        <a href={ `/user/${user.id}` }>
             { user.name }
         </a>
     );

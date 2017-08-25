@@ -1,14 +1,19 @@
 import React from 'react';
+import UserDisplay from './UserDisplay';
+import CsrfToken from './CsrfToken';
 if (process.env.BROWSER) {
     require('./Header.styl');
 }
 
-const User = ({ user }) => {
+const User = props => {
+    const { user} = props;
     if (user) {
         return (
             <div style={{ float: 'right' }}>
-                <a href="/profile">{ user.name }</a>
-                <form method="POST" action="/logout">
+                <UserDisplay { ...props } />
+                { ' ' }
+                <form className="inline" method="POST" action="/logout">
+                    <CsrfToken { ...props } />
                     <button type="submit">logout</button>
                 </form>
             </div>
@@ -17,6 +22,8 @@ const User = ({ user }) => {
     return (
         <div style={{ float: 'right' }}>
             <a href="/login">login</a>
+            { ' ' }
+            <a href="/register">register</a>
         </div>
     );
 }

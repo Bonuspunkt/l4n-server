@@ -4,9 +4,15 @@ const os = require('os');
 const Resolver = require('./lib/resolver');
 const { register, resolve } = new Resolver();
 
-register('handleScannerFound', require('./glue/handleScannerFound'))
-
 register('settings', () => require('./settings'));
+
+const db = require('./lib/db')(resolve);
+register('db', () => db);
+
+const userRepo = require('./lib/userRepo')(resolve);
+register('userRepo', () => userRepo);
+
+register('handleScannerFound', require('./glue/handleScannerFound'))
 
 const HttpsClient = require('./lib/httpsClient');
 const httpsClient = new HttpsClient(resolve);
