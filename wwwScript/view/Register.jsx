@@ -7,7 +7,7 @@ const Register = (props) => {
     const { csrfToken } = props;
     const error = props.error
         ? <h4>{ props.error }</h4>
-        : null;
+        : <h4>{ '\0xa0' }</h4>;
 
     return (
         <DefaultLayout { ...props }>
@@ -31,6 +31,6 @@ const Register = (props) => {
             </form>
         </DefaultLayout>
     );
-}
+};
 
 export default Register;

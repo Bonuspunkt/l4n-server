@@ -8,11 +8,9 @@ const AvailableServers = (props) => {
         .map(provider => provider.games.map(game => ({ provider: provider.name, game })))
         .reduce((prev, curr) => prev.concat(curr));
 
-    console.log(servers)
-
     return (
         <article>
-            <h2>Available</h2>
+            <h2>Available Servers</h2>
             <table>
                 <tbody>
                     { servers.map(server => <AvailableServer { ...server } />) }
