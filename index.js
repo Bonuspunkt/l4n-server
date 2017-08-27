@@ -12,6 +12,9 @@ register('db', () => db);
 const userRepo = require('./lib/userRepo')(resolve);
 register('userRepo', () => userRepo);
 
+const lobbyRepo = require('./lib/lobbyRepo')(resolve);
+register('lobbyRepo', () => lobbyRepo);
+
 register('handleScannerFound', require('./glue/handleScannerFound'))
 
 const HttpsClient = require('./lib/httpsClient');

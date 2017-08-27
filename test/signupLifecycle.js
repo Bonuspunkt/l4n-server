@@ -131,7 +131,7 @@ describe('register/login/logout', () => {
         const page = await browser.newPage();
         await verifyError({
             page, username, password1: password,
-            errorMessage: 'Password does not match'
+            errorMessage: 'passwords do not match'
         });
     });
 

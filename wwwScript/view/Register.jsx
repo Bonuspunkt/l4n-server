@@ -6,8 +6,8 @@ import CsrfToken from '../component/CsrfToken'
 const Register = (props) => {
     const { csrfToken } = props;
     const error = props.error
-        ? <h4>{ props.error }</h4>
-        : <h4>{ '\0xa0' }</h4>;
+        ? <h4 className="error">{ props.error }</h4>
+        : <h4>{ '\u00a0' }</h4>; // bad hack to make sure the inputs dont "jump"
 
     return (
         <DefaultLayout { ...props }>

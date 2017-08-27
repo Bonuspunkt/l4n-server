@@ -3,16 +3,9 @@ import ReactDOM from 'react-dom';
 
 import Store from 'repatch';
 
-import Header from './component/Header';
-import Router from './component/Router';
-import GameReady from './component/GameReady';
-
 import './core.styl'
 
-
-const headerEl = document.getElementById('header');
-const mainEl = document.getElementById('main')
-const popupEl = document.getElementById('popup');
+import Header from './component/Header';
 
 /*
 const render = (data) => {
