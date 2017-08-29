@@ -6,7 +6,7 @@ import CsrfToken from '../component/CsrfToken'
 const Login = (props) => {
     const { csrfToken } = props;
     return (
-        <DefaultLayout { ...props }>
+        <DefaultLayout { ...props } title="login">
             <h3>sign in</h3>
             <div>
                 <a href="/auth/steam"><img src="/static/steam/signin.png" /></a>

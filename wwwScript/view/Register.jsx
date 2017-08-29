@@ -10,7 +10,7 @@ const Register = (props) => {
         : <h4>{ '\u00a0' }</h4>; // bad hack to make sure the inputs dont "jump"
 
     return (
-        <DefaultLayout { ...props }>
+        <DefaultLayout { ...props } title="register">
             <h3>register</h3>
             { error }
             <form action="/register" method="POST">

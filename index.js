@@ -9,10 +9,12 @@ register('settings', () => require('./settings'));
 const db = require('./lib/db')(resolve);
 register('db', () => db);
 
-const userRepo = require('./lib/userRepo')(resolve);
+const UserRepo = require('./lib/userRepo');
+const userRepo = new UserRepo(resolve);
 register('userRepo', () => userRepo);
 
-const lobbyRepo = require('./lib/lobbyRepo')(resolve);
+const LobbyRepo = require('./lib/lobbyRepo');
+const lobbyRepo = new LobbyRepo(resolve);
 register('lobbyRepo', () => lobbyRepo);
 
 register('handleScannerFound', require('./glue/handleScannerFound'))

@@ -5,17 +5,21 @@ if (process.env.BROWSER) {
     require('./Header.styl');
 }
 
+const Logout = (props) => (
+    <form className="inline" method="POST" action="/logout">
+        <CsrfToken { ...props } />
+        <button type="submit">logout</button>
+    </form>
+);
+
 const User = props => {
-    const { user} = props;
+    const { user } = props;
     if (user) {
         return (
             <div style={{ float: 'right' }}>
                 <UserDisplay { ...props } />
                 { ' ' }
-                <form className="inline" method="POST" action="/logout">
-                    <CsrfToken { ...props } />
-                    <button type="submit">logout</button>
-                </form>
+                <Logout { ...props } />
             </div>
         );
     }

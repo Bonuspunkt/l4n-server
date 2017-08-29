@@ -2,11 +2,17 @@ require('tap').mochaGlobals();
 const { expect } = require('chai');
 const puppeteer = require('puppeteer');
 
+const fillLogin = require('./prefab/fillLogin');
+const fillRegistration = require('./prefab/fillRegistration');
+
 describe('register/login/logout', () => {
 
     let browser;
     before(async () => {
-        browser = await puppeteer.launch();
+        const options = {
+            //headless: false
+        };
+        browser = await puppeteer.launch(options);
     });
     after(() => {
         browser.close();
@@ -15,6 +21,7 @@ describe('register/login/logout', () => {
     const baseUrl = 'http://localhost:8080/';
     const registerUrl = `${ baseUrl }register`;
     const password = '123456';
+    const timeout = 1e3;
 
     it('should work', async () => {
         const timestamp = Date.now();
@@ -24,60 +31,48 @@ describe('register/login/logout', () => {
         await page.goto(baseUrl);
         await page.click('a[href="/register"]');
 
-        await page.waitForNavigation({ timeout: 1e3, waitUntil: 'load' });
+        await page.waitForNavigation({ timeout, waitUntil: 'load' });
         expect(page.url()).to.equal(`${baseUrl}register`);
 
-        await page.focus('input[name="username"');
-        await page.type(username);
-        await page.focus('input[name="password1"]');
-        await page.type(password);
-        await page.focus('input[name="password2"]');
-        await page.type(password);
-        await page.click('form[action="/register"] button[type="submit"]');
+        await fillRegistration({ page, username, password1: password, password2: password });
 
-        await page.waitForNavigation({ timeout: 1e3, waitUntil: 'load' });
+        await page.waitForNavigation({ timeout, waitUntil: 'load' });
         expect(page.url()).to.equal(`${baseUrl}registered`);
 
         await page.click('a[href="/login"]');
 
-        await page.waitForNavigation({ timeout: 1e3, waitUntil: 'load' });
+        await page.waitForNavigation({ timeout, waitUntil: 'load' });
         expect(page.url()).to.equal(`${baseUrl}login`);
 
-        await page.focus('input[name="username"]');
-        await page.type(username)
-        await page.focus('input[name="password"]');
-        await page.type(password)
-        await page.click('form[action="/auth/local"] button[type="submit"]');
+        await fillLogin({ page, username, password });
 
-        await page.waitForNavigation({ timeout: 1e3, waitUntil: 'load' });
+        await page.waitForNavigation({ timeout, waitUntil: 'load' });
         expect(page.url()).to.equal(baseUrl);
 
         await page.click('form[action="/logout"] button[type="submit"]');
 
-        await page.waitForNavigation({ timeout: 1e3, waitUntil: 'load' });
+        await page.waitForNavigation({ timeout, waitUntil: 'load' });
         expect(page.url()).to.equal(baseUrl);
 
         const registerEl = await page.$('a[href="/register"]');
         expect(registerEl).to.not.equal(null);
 
+        await page.close();
     });
 
-    async function verifyError({ page, username, password1, password2, errorMessage }) {
-        await page.goto(registerUrl);
-        await page.focus('input[name="username"');
-        if (username) { await page.type(username); }
-        await page.focus('input[name="password1"]');
-        if (password1) { await page.type(password); }
-        await page.focus('input[name="password2"]');
-        if (password2) { await page.type(password); }
-        await page.click('form[action="/register"] button[type="submit"]');
 
-        await page.waitForNavigation({ timeout: 1e3, waitUntil: 'load' });
-        expect(page.url()).to.equal(`${baseUrl}register`);
+    async function verifyRegistrationError({ page, username, password1, password2, errorMessage }) {
+        await page.goto(registerUrl);
+
+        await fillRegistration({ page, username, password1, password2 });
+
+        await page.waitForNavigation({ timeout, waitUntil: 'load' });
+        expect(page.url()).to.equal(registerUrl);
         const errorEl = await page.$('h4.error');
         const actualErrorMessage = await errorEl.evaluate((el) => el.textContent);
         expect(actualErrorMessage).to.equal(errorMessage);
     }
+
 
     it('should not allow duplicate username', async () => {
         const timestamp = Date.now();
@@ -86,31 +81,30 @@ describe('register/login/logout', () => {
         const page = await browser.newPage();
 
         await page.goto(registerUrl);
-        await page.focus('input[name="username"');
-        await page.type(username);
-        await page.focus('input[name="password1"]');
-        await page.type(password);
-        await page.focus('input[name="password2"]');
-        await page.type(password);
-        await page.click('form[action="/register"] button[type="submit"]');
 
-        await page.waitForNavigation({ timeout: 1e3, waitUntil: 'load' });
+        await fillRegistration({ page, username, password1: password, password2: password });
+
+        await page.waitForNavigation({ timeout, waitUntil: 'load' });
         expect(page.url()).to.equal(`${baseUrl}registered`);
 
-        await verifyError({ page, username,
-            password1: password,
-            password2: password,
+        await verifyRegistrationError({
+            page, registerUrl, username,
+            password1: password, password2: password,
             errorMessage: 'username already registered'
         });
+
+        await page.close();
     });
 
     it('should not allow empty username', async () => {
 
         const page = await browser.newPage();
-        await verifyError({
-            page,
+        await verifyRegistrationError({
+            page, registerUrl,
             errorMessage: 'username is required'
         });
+
+        await page.close();
     });
 
     it('should not allow empty password', async () => {
@@ -118,10 +112,12 @@ describe('register/login/logout', () => {
         const username = `user-${ timestamp }`;
 
         const page = await browser.newPage();
-        await verifyError({
-            page, username,
+        await verifyRegistrationError({
+            page, registerUrl, username,
             errorMessage: 'password is required'
         });
+
+        await page.close();
     });
 
     it('should verify that both passwords match', async () => {
@@ -129,10 +125,12 @@ describe('register/login/logout', () => {
         const username = `user-${ timestamp }`;
 
         const page = await browser.newPage();
-        await verifyError({
-            page, username, password1: password,
+        await verifyRegistrationError({
+            page, registerUrl, username, password1: password,
             errorMessage: 'passwords do not match'
         });
+
+        await page.close();
     });
 
 });
