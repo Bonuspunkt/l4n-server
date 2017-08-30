@@ -34,12 +34,15 @@ const OpenLobbies = (props) => {
         <LobbyDisplay key={ lobby.id } { ...props } lobby={ lobby } />
     );
 
+    const customLobby = user
+        ? <a className="button" href="/lobby/custom">Custom Lobby</a>
+        : null;
+
     return (
         <article>
             <h2>Open Lobbies</h2>
             { lobbies }
-
-            <a className="button" href="/lobby/custom">Custom Lobby</a>
+            { customLobby }
         </article>
     );
 }

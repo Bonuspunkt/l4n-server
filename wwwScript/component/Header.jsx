@@ -16,7 +16,7 @@ const User = props => {
     const { user } = props;
     if (user) {
         return (
-            <div style={{ float: 'right' }}>
+            <div className="header-right">
                 <UserDisplay { ...props } />
                 { ' ' }
                 <Logout { ...props } />
@@ -24,7 +24,7 @@ const User = props => {
         );
     }
     return (
-        <div style={{ float: 'right' }}>
+        <div className="header-right">
             <a href="/login">login</a>
             { ' ' }
             <a href="/register">register</a>
@@ -39,7 +39,7 @@ const Header = (props) => {
 
     return (
         <header>
-            <a href={ href }>{ name }</a>
+            <a className="header-left" href={ href }>{ name }</a>
             <User { ...props } />
         </header>
     );
