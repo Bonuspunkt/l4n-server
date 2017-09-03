@@ -4,48 +4,50 @@ import GameDisplay from './GameDisplay';
 import LobbyAction from './LobbyAction';
 
 const LobbyDisplay = (props) => {
-    const { lobby, user } = props;
-    const { id, provider, game, name, participating } = lobby;
+    const { lobby, user, game } = props;
+    const { id, provider, name } = lobby;
 
-    let action;
-
-    if (!user) {
-        action = null;
-    } else if (participating) {
-        action = (<LobbyAction { ...props } action="leave" />);
-    } else {
-        action = (<LobbyAction { ...props } action="join" />);
-    }
+    const providerDisplay = provider
+        ? provider
+        : <em>custom</em>
 
     return (
-        <div>
-            { provider }
-            <GameDisplay { ...game } />
-            <a href={ `/lobby/${ id }` }>{ name }</a>
-            { action }
-        </div>
+        <tr>
+            <td>{ providerDisplay }</td>
+            <td><GameDisplay { ...game } /></td>
+            <td><a href={ `/lobby/${ id }` }>{ name }</a></td>
+            <td><LobbyAction { ...props } lobby={ lobby } /></td>
+        </tr>
     );
 };
 
 const OpenLobbies = (props) => {
-    const { openLobbies, user } = props;
+    const { lobbies, providers, user } = props;
 
-    const lobbies = openLobbies.map(lobby =>
-        <LobbyDisplay key={ lobby.id } { ...props } lobby={ lobby } />
-    );
+    const lobbyDisplays = lobbies.map(lobby => {
+        const game = lobby.provider
+            ? providers.find(p => p.name === lobby.provider)
+            : { name: lobby.name }
+
+        return (<LobbyDisplay key={ lobby.id } { ...props } lobby={ lobby } game={ game } />);
+    });
 
     const customLobby = user
-        ? <a className="button" href="/lobby/custom">Custom Lobby</a>
+        ? <a className="button" href="/lobby/custom">Open Custom Lobby</a>
         : null;
 
     return (
         <article>
             <h2>Open Lobbies</h2>
-            { lobbies }
+            <table>
+                <tbody>
+                    { lobbyDisplays }
+                </tbody>
+            </table>
             { customLobby }
         </article>
     );
-}
+};
 
 
 export default OpenLobbies;

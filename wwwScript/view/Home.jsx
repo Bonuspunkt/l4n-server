@@ -2,7 +2,6 @@ import React from 'react';
 
 import DefaultLayout from './layout/Default';
 
-import MyLobbies from '../component/MyLobbies'
 import OpenLobbies from '../component/OpenLobbies';
 import AvailableServers from '../component/AvailableServers';
 

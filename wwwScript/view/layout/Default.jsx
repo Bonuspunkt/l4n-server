@@ -13,7 +13,9 @@ const DefaultLayout = (props) => {
             </head>
             <body>
                 <Header { ...props } />
-                { props.children }
+                <div id="main">
+                    { props.children }
+                </div>
                 <script src="/script.js"></script>
             </body>
         </html>

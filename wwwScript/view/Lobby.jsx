@@ -6,16 +6,18 @@ import LobbyAction from '../component/LobbyAction';
 import UserDisplay from '../component/UserDisplay';
 
 const Lobby = (props) => {
-    const { provider, game, lobby, user } = props;
+    const { csrfToken, lobbyId, lobbies, providers, user, users } = props;
 
-    const users = lobby.users.map(user =>
+    const lobby = lobbies.find(l => l.id === lobbyId);
+    const lobbyUsers = lobby.users.map(userId => users.find(u => u.id === userId));
+    const provider = providers.find(p => p.name === lobby.provider);
+    const game = provider
+        ? provider.games.find(g => g.id === lobby.game)
+        : { name: lobby.game };
+
+    const usersEls = lobbyUsers.map(user =>
         <li key={ user.id }><UserDisplay user={ user } /></li>
     );
-    const action = lobby.users.length
-        ? lobby.users.find(u => u.id === user.id)
-            ? <LobbyAction { ...props } action="leave" />
-            : <LobbyAction { ...props } action="join" />
-        : <small>closed</small>;
 
     return (
         <DefaultLayout { ... props } title={ `lobby - ${ lobby.name }` }>
@@ -26,10 +28,10 @@ const Lobby = (props) => {
             <h1>
                 { lobby.name }
                 { ' ' }
-                { action }
+                <LobbyAction { ...props } lobby={ lobby } />
             </h1>
             Players:
-            <ul>{ users }</ul>
+            <ul>{ usersEls }</ul>
         </DefaultLayout>
     );
 };

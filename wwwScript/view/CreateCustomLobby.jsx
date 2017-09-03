@@ -26,6 +26,10 @@ const CreateCustomLobby = (props) => {
                 </label>
                 <h4>infos</h4>
                 <label>
+                    <span>max players</span>
+                    <input type="number" name="maxPlayers" />
+                </label>
+                <label>
                     <span>info</span>
                     <textarea name="info" />
                     <CommonMark text={ '# game\n install' } />

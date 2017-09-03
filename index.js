@@ -31,10 +31,14 @@ scanner.start();
 const Store = new require('./lib/Store');
 const publicStore = new Store('public', {
     lanName: 'vulkan44',
-    lobbies: [],
+    lobbies: lobbyRepo.allOpen(),
     providers: [],
+    users: userRepo.all()
 });
 register('publicStore', () => publicStore);
+
+require('./glue/hookLobbyToStore')(resolve);
+require('./glue/hookUserToStore')(resolve);
 
 const privateStore = new Store('private', {
     providers: []
