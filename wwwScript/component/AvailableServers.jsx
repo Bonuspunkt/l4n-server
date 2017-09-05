@@ -6,7 +6,7 @@ const AvailableServers = (props) => {
     const { providers, user } = props;
     const servers = providers
         .map(provider => provider.games.map(game => ({ provider: provider.name, game })))
-        .reduce((prev, curr) => prev.concat(curr));
+        .reduce((prev, curr) => prev.concat(curr), []);
 
     return (
         <article>

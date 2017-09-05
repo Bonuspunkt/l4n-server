@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const os = require('os');
 
-const Resolver = require('./lib/resolver');
+const { Resolver } = require('l4n-common');
 const { register, resolve } = new Resolver();
 
 register('settings', () => require('./settings'));

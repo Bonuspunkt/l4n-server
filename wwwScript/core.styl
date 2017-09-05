@@ -40,8 +40,14 @@ button, .button
     font-size: 1rem
     padding: .5rem
 
+    &:disabled
+        background-color: darken($color-bg, 20)
+        color: darken($color-text, 20)
+
+
 .button
     display: inline-block
+
 
 table
     width: 100%

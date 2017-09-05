@@ -39,8 +39,10 @@ const Header = (props) => {
 
     return (
         <header>
-            <a className="header-left" href={ href }>{ name }</a>
-            <User { ...props } />
+            <div className="header">
+                <a className="header-left" href={ href }>{ name }</a>
+                <User { ...props } />
+            </div>
         </header>
     );
 }
