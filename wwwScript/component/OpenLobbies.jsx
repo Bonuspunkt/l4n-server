@@ -27,7 +27,7 @@ const OpenLobbies = (props) => {
     const lobbyDisplays = lobbies.map(lobby => {
         const game = lobby.provider
             ? providers.find(p => p.name === lobby.provider)
-            : { name: lobby.name }
+            : { name: lobby.game }
 
         return (<LobbyDisplay key={ lobby.id } { ...props } lobby={ lobby } game={ game } />);
     });

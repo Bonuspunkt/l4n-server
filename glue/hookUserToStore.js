@@ -5,9 +5,11 @@ function hookup(resolve) {
     const publicStore = resolve('publicStore');
 
     userRepo.on('add', user => {
+        const { id, name } = user;
+
         publicStore.dispatch(state => ({
             ...state,
-            users: state.users.concat([user])
+            users: state.users.concat([{ id, name }])
         }))
     })
 }

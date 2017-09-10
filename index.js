@@ -19,9 +19,13 @@ register('lobbyRepo', () => lobbyRepo);
 
 register('handleScannerFound', require('./glue/handleScannerFound'))
 
+/*
 const HttpsClient = require('./lib/httpsClient');
 const httpsClient = new HttpsClient(resolve);
 register('httpsClient', () => httpsClient);
+*/
+const TlsClient = require('./lib/tlsClient');
+
 
 const UdpScanner = require('./lib/udpScanner');
 const scanner = new UdpScanner(resolve);
@@ -46,4 +50,21 @@ const privateStore = new Store('private', {
 register('privateStore', () => privateStore);
 
 const httpServer = require('./lib/httpServer')(resolve);
+register('httpServer', () => httpServer);
+
+const webSocketServer = require('./lib/webSocketServer')(resolve);
+register('webSocketServer', () => webSocketServer);
+
+httpServer.get('*', (req, res) => {
+    res.render('App', Object.assign(
+        { url: req.path },
+        publicStore.getState(),
+        { user: req.user, csrfToken: req.csrfToken() })
+    );
+});
+
+require('./glue/hookWebSocketsToStore')(resolve);
+require('./glue/hookStoreToWebSocket')(resolve);
+
+
 httpServer.listen(8080);

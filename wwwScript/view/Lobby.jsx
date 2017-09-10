@@ -9,6 +9,14 @@ const Lobby = (props) => {
     const { csrfToken, lobbyId, lobbies, providers, user, users } = props;
 
     const lobby = lobbies.find(l => l.id === lobbyId);
+    if (!lobby) {
+        return (
+            <DefaultLayout { ... props } title={ `lobby - destroyed` }>
+                could not find lobby
+            </DefaultLayout>
+        );
+    }
+
     const lobbyUsers = lobby.users.map(userId => users.find(u => u.id === userId));
     const provider = providers.find(p => p.name === lobby.provider);
     const game = provider
@@ -16,7 +24,10 @@ const Lobby = (props) => {
         : { name: lobby.game };
 
     const usersEls = lobbyUsers.map(user =>
-        <li key={ user.id }><UserDisplay user={ user } /></li>
+        <li key={ user.id }>
+            { user.online ? 'online' : 'offline' }
+            <UserDisplay user={ user } />
+        </li>
     );
 
     return (

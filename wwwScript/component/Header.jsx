@@ -34,7 +34,7 @@ const User = props => {
 
 const Header = (props) => {
     const { lanName } = props;
-    const href = `https://l4n.at/${ lanName }/`;
+    const href = `https://${lanName}.l4n.at`;
     const name = href.slice(8);
 
     return (

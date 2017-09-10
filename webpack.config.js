@@ -1,7 +1,10 @@
 const path = require('path');
+const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const outputPath = path.resolve(__dirname, 'wwwRoot');
+
+const isDebug = process.argv.includes('-d');
 
 module.exports = {
     entry: path.resolve(__dirname, 'wwwScript/index.jsx'),
@@ -16,13 +19,13 @@ module.exports = {
             loader: 'babel-loader',
             query: {
                 presets: [
-                    ['react'],
-                    ['env'],
-                ],
+                    'babel-preset-react',
+                    'babel-preset-env',
+                ].map(require.resolve),
                 plugins: [
                     // still stage 3, will hopefully be soon included in env
-                    "transform-object-rest-spread"
-                ]
+                    'babel-plugin-transform-object-rest-spread'
+                ].map(require.resolve)
             }
         }, {
             test: /\.styl$/,
@@ -40,6 +43,10 @@ module.exports = {
     },
     plugins: [
         new ExtractTextPlugin('stylesheet.css', { allChunks: true }),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
+            'process.env.BROWSER': true,
+        })
     ],
 
     devServer: {

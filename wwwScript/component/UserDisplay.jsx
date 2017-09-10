@@ -1,9 +1,11 @@
 import React from 'react'
 
 const UserDisplay = ({ user }) => {
+    const { id, name, online } = user;
+
     return (
-        <a href={ `/user/${user.id}` }>
-            { user.name }
+        <a href={ `/user/${ id }` }>
+            { name }
         </a>
     );
 };
