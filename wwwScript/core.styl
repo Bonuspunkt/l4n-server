@@ -30,7 +30,10 @@ input, select, textarea
     background: $background
     color: $text
     padding: .2rem
-    border: .1rem solid #080
+    border: .1rem solid $text
+
+*:focus
+    outline: .1rem solid #080
 
 button, .button
     border: 0
@@ -72,12 +75,6 @@ form
         display: block
         width: 100%
 
-        & > *
-            padding: .5rem
-            line-height: 1rem
-            font-size: 1rem
-            font-family: sans-serif
-
         span
             padding-right: 1rem
             text-align: right
@@ -86,6 +83,12 @@ form
             display: inline-block
 
         input, textarea, select, .commonMark
+            padding: .5rem
+            line-height: 1rem
+            font-size: 1rem
+            font-family: sans-serif
+
+        & > input, textarea, select, .commonMark
             display: inline-block
             width: 35rem
 

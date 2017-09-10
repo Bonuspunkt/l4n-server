@@ -1,11 +1,18 @@
 import React from 'react'
+if (process.env.BROWSER) {
+    require('./UserDisplay.styl')
+}
 
-const UserDisplay = ({ user }) => {
+const UserDisplay = ({ user, displayOnline }) => {
     const { id, name, online } = user;
 
+    const onlineState = (displayOnline
+            ? <span className={ `userDisplay-${ user.online ? 'online': 'offline' }` } />
+            : undefined);
+
     return (
-        <a href={ `/user/${ id }` }>
-            { name }
+        <a className="userDisplay" href={ `/user/${ id }` }>
+            { onlineState } { ' ' } { name }
         </a>
     );
 };

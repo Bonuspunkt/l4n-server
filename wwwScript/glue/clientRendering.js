@@ -1,16 +1,24 @@
+const debug = require('debug')('glue:clientRendering');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from '../App';
 
 const anchor = document.createElement('a');
+const blacklist = [
+    new RegExp('^/auth'),
+    new RegExp('^/logout')
+];
 export function parse(url) {
     anchor.href = url;
-    return {
-        onSite: anchor.host === location.host,
-        host: anchor.host,
-        pathname: anchor.pathname
+    const { host, pathname } = anchor;
+
+    if (host !== location.host || blacklist.some(rx => rx.test(pathname))) {
+        return;
     }
+
+    return { host, pathname };
 }
+
 
 export default function(resolve) {
     const store = resolve('store');
@@ -26,7 +34,7 @@ export default function(resolve) {
         if (!target) { return; }
 
         const parsed = parse(target.href);
-        if (!parsed.onSite) { return; }
+        if (!parsed) { return; }
 
         history.pushState(null, 'something', parsed.pathname);
         store.dispatch(state => ({ ...state, url: parsed.pathname }));
@@ -39,6 +47,7 @@ export default function(resolve) {
 
         const form = e.target;
         const url = form.action;
+        if (!parse(url)) { return; }
 
         const formData = new FormData(form);
         const searchParams = new URLSearchParams(formData.entries());
@@ -55,13 +64,13 @@ export default function(resolve) {
         .then(res => {
             if (res.redirected) {
                 const parsed = parse(res.url);
-                if (!parsed.onSite) { return; }
+                if (!parsed) { return; }
 
                 history.pushState(null, 'title', parsed.pathname);
                 store.dispatch(state => ({ ...state, url: parsed.pathname }));
             }
         })
-        .catch(ex => console.error(ex));
+        .catch(ex => debug('fetch failed', ex));
 
         e.preventDefault();
     });
@@ -72,7 +81,8 @@ export default function(resolve) {
         store.dispatch(state => ({ ...state, url: location.pathname }));
     });
 
+    const targetEl = document.getElementById('main');
     store.subscribe(() => {
-        ReactDOM.render(<App { ...store.getState() } />, document.body);
+        ReactDOM.render(<App { ...store.getState() } />, targetEl);
     });
 }

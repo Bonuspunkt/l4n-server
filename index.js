@@ -41,8 +41,8 @@ const publicStore = new Store('public', {
 });
 register('publicStore', () => publicStore);
 
-require('./glue/hookLobbyToStore')(resolve);
-require('./glue/hookUserToStore')(resolve);
+require('./glue/lobbyRepoToStore')(resolve);
+require('./glue/userRepoToStore')(resolve);
 
 const privateStore = new Store('private', {
     providers: []
@@ -63,8 +63,8 @@ httpServer.get('*', (req, res) => {
     );
 });
 
-require('./glue/hookWebSocketsToStore')(resolve);
-require('./glue/hookStoreToWebSocket')(resolve);
+require('./glue/storeToWebSocket')(resolve);
+require('./glue/webSocketToStore')(resolve);
 
 
 httpServer.listen(8080);

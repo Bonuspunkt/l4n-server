@@ -34,7 +34,7 @@ module.exports = function(resolve) {
                 privateStore.dispatch(writeProviderUrlMapping(provider, headers.etag));
                 publicStore.dispatch(mergeProviderInfo(provider));
             })
-            .catch(ex => console.log(ex));
+            .catch(ex => debug(ex));
     };
 
     return handleScannerFound;

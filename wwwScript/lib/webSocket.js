@@ -1,3 +1,4 @@
+const debug = require('debug')('lib:webSocket')
 import { EventEmitter } from 'events'
 
 class WebSocketWrapper extends EventEmitter {
@@ -26,7 +27,6 @@ class WebSocketWrapper extends EventEmitter {
             const data = JSON.parse(message.data);
 
             if (data.state) {
-                console.log('state');
                 this.emit('state', data.state);
             } else if (data.offer) {
                 this.emit('offer', data);
@@ -35,7 +35,6 @@ class WebSocketWrapper extends EventEmitter {
             } else if (data.candidate !== undefined) {
                 this.emit('candidate', data);
             } else if (data.patch) {
-                console.log('patch');
                 this.emit('patch', data);
             } else {
                 this.emit('message', data);
@@ -44,20 +43,21 @@ class WebSocketWrapper extends EventEmitter {
     }
 
     _handleOpen() {
-        console.debug('open');
+        debug('open');
         if (this._queue.length) {
-            console.debug(`processing queue (${ this._queue.length }`);
+            debug(`processing queue (${ this._queue.length }`);
             this._queue.forEach(message => this._websocket.send(JSON.stringify(message)));
         }
         this._queue = [];
     }
 
     _handleClose() {
-        console.log('close')
+        debug('close');
+        setTimeout(() => this._initWebSocket(), 30e3 * Math.random());
     }
 
     _handleError(error) {
-        console.error(error);
+        debug(error);
     }
 
     send(data) {
@@ -66,6 +66,11 @@ class WebSocketWrapper extends EventEmitter {
         } else {
             this._websocket.send(JSON.stringify(data));
         }
+    }
+
+    emit(...args) {
+        debug(...args);
+        super.emit(...args);
     }
 }
 

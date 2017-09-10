@@ -25,8 +25,7 @@ const Lobby = (props) => {
 
     const usersEls = lobbyUsers.map(user =>
         <li key={ user.id }>
-            { user.online ? 'online' : 'offline' }
-            <UserDisplay user={ user } />
+            <UserDisplay user={ user } displayOnline />
         </li>
     );
 

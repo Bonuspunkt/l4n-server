@@ -1,23 +1,27 @@
 import React from 'react';
 import Header from '../../component/Header';
+import Title from '../../component/Title';
 
 const DefaultLayout = (props) => {
-    let { title } = props;
+    let { title, user } = props;
     const usedTitle = 'l4n.at' + (title ? ` - ${title}` : '');
 
-    if (typeof document !== 'undefined') {
+    if (process.env.BROWSER) {
         return (
             <div>
-            <Header { ...props } />
-            <div id="main">
+                <Title>{ usedTitle }</Title>
+                <Header { ...props } />
                 { props.children }
-            </div>
-            <footer>
-                <a href="https://github.com/bonuspunkt/l4n-server">l4n-server</a>
-            </footer>
+                <footer>
+                    <a href="https://github.com/bonuspunkt/l4n-server">l4n-server</a>
+                </footer>
             </div>
         );
     }
+
+    const script = user
+        ? <script src="/script.js" />
+        : undefined;
 
     return (
         <html>
@@ -27,14 +31,16 @@ const DefaultLayout = (props) => {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </head>
             <body>
-                <Header { ...props } />
                 <div id="main">
-                    { props.children }
+                    <div>
+                        <Header { ...props } />
+                        { props.children }
+                        <footer>
+                            <a href="https://github.com/bonuspunkt/l4n-server">l4n-server</a>
+                        </footer>
+                    </div>
                 </div>
-                <footer>
-                    <a href="https://github.com/bonuspunkt/l4n-server">l4n-server</a>
-                </footer>
-                <script src="/script.js"></script>
+                { script }
             </body>
         </html>
     );

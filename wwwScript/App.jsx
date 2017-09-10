@@ -8,6 +8,9 @@ import Login from './view/Login';
 import CreateCustomLobby from './view/CreateCustomLobby';
 import CreateLobby from './view/CreateLobby';
 import Lobby from './view/Lobby';
+import User from './view/User'
+
+import NotMapped from './view/NotMapped';
 
 export const routes = [{
     pattern: '/',
@@ -30,6 +33,9 @@ export const routes = [{
 }, {
     pattern: '/lobby/:lobbyId!number',
     Component: Lobby
+}, {
+    pattern: '/user/:userId!number',
+    Component: User
 }].map(({ pattern, Component }) => ({
     test: route(pattern),
     Component
@@ -44,8 +50,7 @@ const App = (props) => {
             return (<Component { ...props } { ...urlParams } />);
         }
     }
-    console.error('url', url);
-    return (<h1>not mapped</h1>)
+    return (<NotMapped { ...props } />)
 };
 
 export default App;
