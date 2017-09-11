@@ -65,4 +65,4 @@ if (!isDebug) {
     config.plugins.push(new webpack.optimize.UglifyJsPlugin());
 }
 
-module.exports = config
+module.exports = config;
