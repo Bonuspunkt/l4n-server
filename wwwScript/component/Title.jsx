@@ -7,7 +7,9 @@ class Title extends React.PureComponent {
     }
     componentDidUpdate(prevProps, prevState) {
         const { children } = this.props;
-        if (prevProps.children === children) { return; }
+        if (prevProps.children === children) {
+            return;
+        }
         document.title = children;
     }
     render() {
@@ -15,4 +17,4 @@ class Title extends React.PureComponent {
     }
 }
 
-export default Title
+export default Title;

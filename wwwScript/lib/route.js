@@ -10,39 +10,39 @@ const typePattern = type => {
             return '[^/]+';
     }
 };
-const convert = (type) => {
+const convert = type => {
     switch (type) {
         case 'number':
-            return (value) => Number(value);
+            return value => Number(value);
         default:
             return value => value;
     }
-}
+};
 
 function route(pattern) {
-
     const parameterNames = [];
     const conversions = [];
 
     const rxPattern = pattern.replace(paramPattern, (match, parameterName, type) => {
         parameterNames.push(parameterName);
         conversions.push(convert(type));
-        return `(${ typePattern(type) })`;
+        return `(${typePattern(type)})`;
     });
 
-    const rx = new RegExp(`^${ rxPattern }$`);
+    const rx = new RegExp(`^${rxPattern}$`);
 
     return function(url) {
         const match = url.match(rx);
-        if (!match) { return; }
+        if (!match) {
+            return;
+        }
         const [, ...captures] = match;
 
-        const mapped = captures
-            .filter(value => value != undefined)
-            .map((value, i) => ({ [parameterNames[i]]: conversions[i](value) }))
+        const mapped = captures.filter(value => value != undefined).map((value, i) => ({
+            [parameterNames[i]]: conversions[i](value),
+        }));
         return Object.assign({}, ...mapped);
     };
 }
-
 
 module.exports = route;

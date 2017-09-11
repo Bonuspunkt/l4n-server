@@ -1,18 +1,20 @@
-import React from 'react'
+import React from 'react';
 if (process.env.BROWSER) {
-    require('./UserDisplay.styl')
+    require('./UserDisplay.styl');
 }
 
 const UserDisplay = ({ user, displayOnline }) => {
     const { id, name, online } = user;
 
-    const onlineState = (displayOnline
-            ? <span className={ `userDisplay-${ user.online ? 'online': 'offline' }` } />
-            : undefined);
+    const onlineState = displayOnline ? (
+        <span className={`userDisplay-${user.online ? 'online' : 'offline'}`} />
+    ) : (
+        undefined
+    );
 
     return (
-        <a className="userDisplay" href={ `/user/${ id }` }>
-            { onlineState } { ' ' } { name }
+        <a className="userDisplay" href={`/user/${id}`}>
+            {onlineState} {name}
         </a>
     );
 };

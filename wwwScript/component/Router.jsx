@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent } from 'react';
 
 import Login from './Login';
 import CustomLobby from './CustomLobby';
@@ -13,23 +13,24 @@ class Router extends PureComponent {
         const { url } = props;
 
         switch (url) {
-
             case '/login':
-                return (<Login { ...props } />)
+                return <Login {...props} />;
 
             case '/newLobby/custom':
-                return (<CustomLobby { ...props } />);
+                return <CustomLobby {...props} />;
 
             case '/newLobby/:id':
-                return ('oh oh')
+                return 'oh oh';
 
             case '/':
                 return (
                     <div>
-                        <MyLobbies { ...props } />
-                        <OpenLobbies { ...props } />
-                        <AvailableServers { ...props } />
-                        <a className="button" href="/newLobby/custom">create custom lobby</a>
+                        <MyLobbies {...props} />
+                        <OpenLobbies {...props} />
+                        <AvailableServers {...props} />
+                        <a className="button" href="/newLobby/custom">
+                            create custom lobby
+                        </a>
                     </div>
                 );
 
@@ -39,4 +40,4 @@ class Router extends PureComponent {
     }
 }
 
-export default Router
+export default Router;

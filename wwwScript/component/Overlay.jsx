@@ -1,10 +1,10 @@
 import React from 'react';
-import './Overlay.styl'
+import './Overlay.styl';
 
 const Overlay = ({ children, onClick }) => {
     return (
-        <div className="overlay" onClick={ onClick }>
-            { children }
+        <div className="overlay" onClick={onClick}>
+            {children}
         </div>
     );
 };

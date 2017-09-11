@@ -40,14 +40,38 @@
     "webrtc-adapter": "^5.0.2"
   },
   "devDependencies": {
+    "eslint": "4.6.1",
+    "eslint-plugin-prettier": "^2.2.0",
     "nodemon": "^1.12.0",
+    "prettier": "^1.6.1",
     "puppeteer": "^0.10.2",
     "tap": "^10.7.2",
     "webpack-dev-server": "^2.7.1"
   },
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 2017,
+      "ecmaFeatures": {
+        "jsx": true,
+        "experimentalObjectRestSpread": true
+      }
+    },
+    "plugins": [
+      "prettier"
+    ],
+    "rules": {
+      "prettier/prettier": ["error", {
+        "printWidth": 100,
+        "singleQuote": true,
+        "tabWidth": 4,
+        "trailingComma": "all"
+      }]
+    }
+  },
   "scripts": {
     "dev-web": "webpack-dev-server -d",
     "dev-svr": "nodemon",
+    "lint": "eslint --ignore-path .gitignore --ext js,jsx  .",
     "prod": "webpack -p",
     "watch": "webpack -d -w",
     "test": "tap lib/**.test.js wwwScript/lib/**.test.js",

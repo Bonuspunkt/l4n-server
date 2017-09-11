@@ -9,9 +9,9 @@ function hookup(resolve) {
 
         publicStore.dispatch(state => ({
             ...state,
-            users: state.users.concat([{ id, name }])
-        }))
-    })
+            users: state.users.concat([{ id, name }]),
+        }));
+    });
 }
 
 module.exports = hookup;

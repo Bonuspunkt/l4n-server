@@ -4,7 +4,7 @@ module.exports = {
     hostUrl: 'https://myDomain.com/',
     session: {
         // https://www.npmjs.com/package/express-session
-        secret: 'the cat runs over the keyboard'
+        secret: 'the cat runs over the keyboard',
     },
     sessionStore: {
         // https://www.npmjs.com/package/connect-sqlite3
@@ -27,5 +27,5 @@ module.exports = {
         key: fs.readFileSync('client1-key.pem'),
         cert: fs.readFileSync('client1-crt.pem'),
         rejectUnauthorized: true,
-    }
+    },
 };

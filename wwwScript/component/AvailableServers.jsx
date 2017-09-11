@@ -2,7 +2,7 @@ import React from 'react';
 
 import GameDisplay from './GameDisplay';
 
-const AvailableServers = (props) => {
+const AvailableServers = props => {
     const { providers, user } = props;
     const servers = providers
         .map(provider => provider.games.map(game => ({ provider: provider.name, game })))
@@ -13,7 +13,7 @@ const AvailableServers = (props) => {
             <h2>Available Servers</h2>
             <table>
                 <tbody>
-                    { servers.map(server => <AvailableServer { ...server } showOpenLobby={ user } />) }
+                    {servers.map(server => <AvailableServer {...server} showOpenLobby={user} />)}
                 </tbody>
             </table>
         </article>
@@ -21,16 +21,20 @@ const AvailableServers = (props) => {
 };
 
 const AvailableServer = ({ provider, game, showOpenLobby }) => {
-    const openLobby = showOpenLobby
-        ? <a className="button" href={ `/provider/${ provider }/game/${ game.id }` }>open lobby</a>
-        : null;
+    const openLobby = showOpenLobby ? (
+        <a className="button" href={`/provider/${provider}/game/${game.id}`}>
+            open lobby
+        </a>
+    ) : null;
 
     return (
         <tr>
-            <td>{ provider }</td>
-            <td className="noPad"><GameDisplay { ...game } /></td>
-            <td>{ game.name }</td>
-            <td>{ openLobby }</td>
+            <td>{provider}</td>
+            <td className="noPad">
+                <GameDisplay {...game} />
+            </td>
+            <td>{game.name}</td>
+            <td>{openLobby}</td>
         </tr>
     );
 };

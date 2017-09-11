@@ -5,11 +5,11 @@ import DefaultLayout from './layout/Default';
 import OpenLobbies from '../component/OpenLobbies';
 import AvailableServers from '../component/AvailableServers';
 
-const Home = (props) => {
+const Home = props => {
     return (
-        <DefaultLayout { ... props }>
-            <OpenLobbies { ...props } />
-            <AvailableServers { ...props } />
+        <DefaultLayout {...props}>
+            <OpenLobbies {...props} />
+            <AvailableServers {...props} />
         </DefaultLayout>
     );
 };

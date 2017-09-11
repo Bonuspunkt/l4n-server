@@ -1,23 +1,21 @@
 const debug = require('debug')('lib:webRTC');
 
-const streamPromise = navigator.mediaDevices.getUserMedia({ audio: true })
+const streamPromise = navigator.mediaDevices
+    .getUserMedia({ audio: true })
     .then(stream => {
         debug('getUserMedia() ok', stream);
         return stream;
     })
     .catch(error => debug('getUserMedia() error', error));
 
-
 const offerOptions = { offerToReceiveAudio: 1 };
 const servers = null;
-
 
 class WebRTC {
     constructor(resolve) {
         this.webSocket = resolve('webSocket');
         this.peers = {};
     }
-
 
     async initConnection(userId, direction) {
         const stream = await streamPromise;
@@ -28,19 +26,19 @@ class WebRTC {
 
         peerConnection.addTrack(audioTrack, stream);
 
-        peerConnection.addEventListener('icecandidate', (e) => {
-            debug(`sending ${ userId } iceCandidate`)
+        peerConnection.addEventListener('icecandidate', e => {
+            debug(`sending ${userId} iceCandidate`);
             this.webSocket.send({ to: userId, candidate: e.candidate });
         });
 
-        peerConnection.addEventListener('iceconnectionstatechange', (e) => {
-            debug(`iceconnectionstatechange`, peerConnection.iceConnectionState)
-        })
+        peerConnection.addEventListener('iceconnectionstatechange', e => {
+            debug(`iceconnectionstatechange`, peerConnection.iceConnectionState);
+        });
 
         const audioEl = document.createElement('audio');
         document.body.appendChild(audioEl);
-        peerConnection.addEventListener('track', (e) => {
-            debug('track', e)
+        peerConnection.addEventListener('track', e => {
+            debug('track', e);
             const [stream] = e.streams;
 
             const canvas = document.createElement('canvas');
@@ -48,49 +46,45 @@ class WebRTC {
             new (require('./streamvisualizer'))(stream, canvas).start();
 
             audioEl.srcObject = stream;
-        })
-
+        });
 
         this.peers[userId] = {
             peerConnection,
             direction,
-            audioEl
+            audioEl,
         };
 
         return peerConnection;
     }
 
     async offer(userId) {
-        debug(`starting call to ${ userId }`);
+        debug(`starting call to ${userId}`);
 
         const peerConnection = await this.initConnection(userId, 'out');
 
-        peerConnection.createOffer(offerOptions)
-            .then(offer => {
-                peerConnection.setLocalDescription(offer);
+        peerConnection.createOffer(offerOptions).then(offer => {
+            peerConnection.setLocalDescription(offer);
 
-                debug('sending offer');
-                this.webSocket.send({ to: userId, offer });
-            });
-
+            debug('sending offer');
+            this.webSocket.send({ to: userId, offer });
+        });
     }
 
     async answer(userId, offer) {
-        debug(`received call from ${ userId }`);
-        const peerConnection = await this.initConnection(userId,  'in');
+        debug(`received call from ${userId}`);
+        const peerConnection = await this.initConnection(userId, 'in');
 
-        await this.setRemoteDescription(userId, offer)
+        await this.setRemoteDescription(userId, offer);
 
-        peerConnection.createAnswer()
-            .then(answer => {
-                peerConnection.setLocalDescription(answer);
-                debug(`sending answer`);
-                this.webSocket.send({ to: userId, answer })
-            })
+        peerConnection.createAnswer().then(answer => {
+            peerConnection.setLocalDescription(answer);
+            debug(`sending answer`);
+            this.webSocket.send({ to: userId, answer });
+        });
 
         this.peers[userId] = {
             peerConnection,
-            direction: 'in'
+            direction: 'in',
         };
     }
 
@@ -101,7 +95,7 @@ class WebRTC {
 
     addIceCandidate(userId, candidate) {
         const { peerConnection } = this.peers[userId];
-        debug(`from ${ userId } adding candidate`, candidate);
+        debug(`from ${userId} adding candidate`, candidate);
         return peerConnection.addIceCandidate(candidate);
     }
 
@@ -109,7 +103,6 @@ class WebRTC {
         const { peerConnection } = this.peers[userId];
         peerConnection.close();
     }
-
 }
 
 export default WebRTC;

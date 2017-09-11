@@ -1,10 +1,9 @@
-require('tap').mochaGlobals()
+require('tap').mochaGlobals();
 const { expect } = require('chai');
 
 const route = require('./route');
 
 describe('route', () => {
-
     it('should match simple route', () => {
         const check = route('/:text');
 
@@ -38,5 +37,4 @@ describe('route', () => {
 
         expect(check('/a/b')).to.deep.equal({ string: 'a/b' });
     });
-
 });

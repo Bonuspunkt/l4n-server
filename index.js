@@ -17,7 +17,7 @@ const LobbyRepo = require('./lib/lobbyRepo');
 const lobbyRepo = new LobbyRepo(resolve);
 register('lobbyRepo', () => lobbyRepo);
 
-register('handleScannerFound', require('./glue/handleScannerFound'))
+register('handleScannerFound', require('./glue/handleScannerFound'));
 
 /*
 const HttpsClient = require('./lib/httpsClient');
@@ -25,7 +25,6 @@ const httpsClient = new HttpsClient(resolve);
 register('httpsClient', () => httpsClient);
 */
 const TlsClient = require('./lib/tlsClient');
-
 
 const UdpScanner = require('./lib/udpScanner');
 const scanner = new UdpScanner(resolve);
@@ -37,7 +36,7 @@ const publicStore = new Store('public', {
     lanName: 'vulkan44',
     lobbies: lobbyRepo.allOpen(),
     providers: [],
-    users: userRepo.all()
+    users: userRepo.all(),
 });
 register('publicStore', () => publicStore);
 
@@ -45,7 +44,7 @@ require('./glue/lobbyRepoToStore')(resolve);
 require('./glue/userRepoToStore')(resolve);
 
 const privateStore = new Store('private', {
-    providers: []
+    providers: [],
 });
 register('privateStore', () => privateStore);
 
@@ -56,15 +55,16 @@ const webSocketServer = require('./lib/webSocketServer')(resolve);
 register('webSocketServer', () => webSocketServer);
 
 httpServer.get('*', (req, res) => {
-    res.render('App', Object.assign(
-        { url: req.path },
-        publicStore.getState(),
-        { user: req.user, csrfToken: req.csrfToken() })
+    res.render(
+        'App',
+        Object.assign({ url: req.path }, publicStore.getState(), {
+            user: req.user,
+            csrfToken: req.csrfToken(),
+        }),
     );
 });
 
 require('./glue/storeToWebSocket')(resolve);
 require('./glue/webSocketToStore')(resolve);
-
 
 httpServer.listen(8080);

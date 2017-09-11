@@ -1,5 +1,5 @@
-const debug = require('debug')('lib:webSocket')
-import { EventEmitter } from 'events'
+const debug = require('debug')('lib:webSocket');
+import { EventEmitter } from 'events';
 
 class WebSocketWrapper extends EventEmitter {
     constructor() {
@@ -12,15 +12,14 @@ class WebSocketWrapper extends EventEmitter {
         this._queue = [];
 
         const { protocol, host } = window.location;
-        this._url = `${ protocol.replace(/http/, 'ws') }//${ host }/`;
+        this._url = `${protocol.replace(/http/, 'ws')}//${host}/`;
 
         this._initWebSocket();
     }
 
     _initWebSocket() {
-
-        const webSocket = this._websocket = new WebSocket(this._url);
-        webSocket.addEventListener('open', this._handleOpen)
+        const webSocket = (this._websocket = new WebSocket(this._url));
+        webSocket.addEventListener('open', this._handleOpen);
         webSocket.addEventListener('close', this._handleClose);
         webSocket.addEventListener('error', this._handleError);
         webSocket.addEventListener('message', message => {
@@ -45,15 +44,16 @@ class WebSocketWrapper extends EventEmitter {
     _handleOpen() {
         debug('open');
         if (this._queue.length) {
-            debug(`processing queue (${ this._queue.length }`);
+            debug(`processing queue (${this._queue.length}`);
             this._queue.forEach(message => this._websocket.send(JSON.stringify(message)));
         }
         this._queue = [];
     }
 
     _handleClose() {
-        debug('close');
-        setTimeout(() => this._initWebSocket(), 30e3 * Math.random());
+        const timeout = (30e3 * Math.random()) | 0;
+        debug(`close - retry in ${timeout}ms`);
+        setTimeout(() => this._initWebSocket(), timeout);
     }
 
     _handleError(error) {

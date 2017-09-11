@@ -10,9 +10,9 @@ module.exports = function(resolve) {
         const nextState = reducer(state);
 
         const patch = jDiff.diff(state, nextState);
-        debug(patch)
+        debug(patch);
         webSocketServer.broadcast({ patch });
 
         return next(_ => nextState);
-    })
-}
+    });
+};
