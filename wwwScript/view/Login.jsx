@@ -15,15 +15,15 @@ const Login = props => {
     return (
         <DefaultLayout {...props} title="login">
             <h3>sign in</h3>
-            <form action="/auth/local" method="POST">
+            <form action="/login" method="POST">
                 <CsrfToken {...props} />
                 <label>
                     <span>Username</span>
-                    <input type="text" name="username" />
+                    <input type="text" name="username" required autofocus />
                 </label>
                 <label>
                     <span>Password</span>
-                    <input type="password" name="password" />
+                    <input type="password" name="password" required />
                 </label>
                 <label>
                     <span />

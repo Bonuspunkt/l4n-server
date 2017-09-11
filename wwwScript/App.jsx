@@ -24,7 +24,7 @@ export const routes = [
     },
     {
         pattern: '/loginFailed',
-        Component: LoginFailed
+        Component: LoginFailed,
     },
     {
         pattern: '/register',

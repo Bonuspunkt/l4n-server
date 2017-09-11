@@ -15,21 +15,26 @@ const CreateCustomLobby = props => {
                 <input type="hidden" name="userId" value={user.id} />
                 <label>
                     <span>game</span>
-                    <input name="game" placeholder="ex. CS:GO" />
+                    <input type="text" name="game" required placeholder="ex. CS:GO" />
                 </label>
                 <label>
                     <span>lobby name</span>
-                    <input name="name" placeholder="ex. casual real life simulator 2020" />
+                    <input
+                        type="text"
+                        name="name"
+                        required
+                        placeholder="ex. casual real life simulator 2020"
+                    />
                 </label>
                 <h4>spawn conditions</h4>
                 <label>
                     <span>min players</span>
-                    <input type="number" name="minPlayers" />
+                    <input type="number" name="minPlayers" required min="2" />
                 </label>
                 <h4>infos</h4>
                 <label>
                     <span>max players</span>
-                    <input type="number" name="maxPlayers" />
+                    <input type="number" name="maxPlayers" required min="2" />
                 </label>
                 <label>
                     <span>info</span>

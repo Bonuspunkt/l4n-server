@@ -28,7 +28,7 @@ class CommonMarkInput extends PureComponent {
         const preview = expanded ? <CommonMark text={value} /> : null;
 
         return (
-            <div className={ `commonMarkInput ${ className }` }>
+            <div className={`commonMarkInput ${className}`}>
                 <textarea
                     className="commonMarkInput-text"
                     name={name}
