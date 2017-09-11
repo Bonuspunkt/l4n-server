@@ -5,6 +5,7 @@ import Home from './view/Home';
 import Register from './view/Register';
 import Registered from './view/Registered';
 import Login from './view/Login';
+import LoginFailed from './view/LoginFailed';
 import CreateCustomLobby from './view/CreateCustomLobby';
 import CreateLobby from './view/CreateLobby';
 import Lobby from './view/Lobby';
@@ -20,6 +21,10 @@ export const routes = [
     {
         pattern: '/login',
         Component: Login,
+    },
+    {
+        pattern: '/loginFailed',
+        Component: LoginFailed
     },
     {
         pattern: '/register',

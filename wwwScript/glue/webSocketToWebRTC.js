@@ -1,3 +1,5 @@
+const debug = require('debug')('glue:webSocketToWebRTC');
+
 export default function webSocketToWebRTC(resolve) {
     const webSocket = resolve('webSocket');
     const webRTC = resolve('webRTC');
@@ -5,19 +7,19 @@ export default function webSocketToWebRTC(resolve) {
     webSocket.on('offer', ({ from, offer }) =>
         webRTC
             .answer(from, offer)
-            .then(() => console.log('send answer'))
-            .catch(e => console.error(e)),
+            .then(() => debug('send answer'))
+            .catch(e => debug(e)),
     );
     webSocket.on('answer', ({ from, answer }) =>
         webRTC
             .setRemoteDescription(from, answer)
-            .then(() => console.log('setDesc'))
-            .catch(e => console.error(e)),
+            .then(() => debug('setDesc'))
+            .catch(e => debug(e)),
     );
     webSocket.on('candidate', ({ from, candidate }) =>
         webRTC
             .addIceCandidate(from, candidate)
-            .then(() => console.log('candidate'))
-            .catch(e => console.error(e)),
+            .then(() => debug('candidate'))
+            .catch(e => debug(e)),
     );
 }

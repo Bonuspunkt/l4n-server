@@ -13,6 +13,6 @@ module.exports = function(resolve) {
         debug(patch);
         webSocketServer.broadcast({ patch });
 
-        return next(_ => nextState);
+        return next(() => nextState);
     });
 };

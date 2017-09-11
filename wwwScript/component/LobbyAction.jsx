@@ -19,7 +19,6 @@ const LobbyAction = props => {
 
     if (!user) return null;
 
-    let action;
     if (!lobby.users.length) {
         return <small>closed</small>;
     } else if (lobby.userId === user.id) {

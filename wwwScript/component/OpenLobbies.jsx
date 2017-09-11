@@ -4,7 +4,7 @@ import GameDisplay from './GameDisplay';
 import LobbyAction from './LobbyAction';
 
 const LobbyDisplay = props => {
-    const { lobby, user, game } = props;
+    const { lobby, game } = props;
     const { id, provider, name } = lobby;
 
     const providerDisplay = provider ? provider : <em>custom</em>;
@@ -36,11 +36,13 @@ const OpenLobbies = props => {
         return <LobbyDisplay key={lobby.id} {...props} lobby={lobby} game={game} />;
     });
 
-    const customLobby = user ? (
-        <a className="button" href="/lobby/custom">
-            Open Custom Lobby
-        </a>
-    ) : null;
+    const inLobby = user && lobbies.some(lobby => lobby.users.includes(user.id));
+    const customLobby =
+        user && !inLobby ? (
+            <a className="button" href="/lobby/custom">
+                Open Custom Lobby
+            </a>
+        ) : null;
 
     return (
         <article>

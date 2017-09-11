@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-const os = require('os');
-
 const { Resolver } = require('l4n-common');
 const { register, resolve } = new Resolver();
 
@@ -19,17 +17,12 @@ register('lobbyRepo', () => lobbyRepo);
 
 register('handleScannerFound', require('./glue/handleScannerFound'));
 
-/*
-const HttpsClient = require('./lib/httpsClient');
-const httpsClient = new HttpsClient(resolve);
-register('httpsClient', () => httpsClient);
-*/
-const TlsClient = require('./lib/tlsClient');
+//const TlsClient = require('./lib/tlsClient');
 
 const UdpScanner = require('./lib/udpScanner');
 const scanner = new UdpScanner(resolve);
-scanner.on('found', resolve('handleScannerFound'));
 scanner.start();
+//scanner.on('found', resolve('handleScannerFound'));
 
 const Store = new require('./lib/Store');
 const publicStore = new Store('public', {

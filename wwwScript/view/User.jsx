@@ -1,8 +1,6 @@
 import React from 'react';
 import DefaultLayout from './layout/Default';
 
-const EditUser = ({ user }) => <input name="name" value={user.name} />;
-
 const User = props => {
     const { userId, users } = props;
     const readOnly = props.user.id !== userId;

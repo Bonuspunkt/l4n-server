@@ -4,6 +4,14 @@ import DefaultLayout from './layout/Default';
 import CsrfToken from '../component/CsrfToken';
 
 const Login = props => {
+    const { user } = props;
+    if (user) {
+        return (
+            <DefaultLayout {...props} title="login">
+                <h1>already logged in</h1>
+            </DefaultLayout>
+        );
+    }
     return (
         <DefaultLayout {...props} title="login">
             <h3>sign in</h3>

@@ -13,7 +13,13 @@ const AvailableServers = props => {
             <h2>Available Servers</h2>
             <table>
                 <tbody>
-                    {servers.map(server => <AvailableServer {...server} showOpenLobby={user} />)}
+                    {servers.map(server => (
+                        <AvailableServer
+                            key={server.provider + ':' + server.game}
+                            {...server}
+                            showOpenLobby={user}
+                        />
+                    ))}
                 </tbody>
             </table>
         </article>

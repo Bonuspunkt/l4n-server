@@ -6,7 +6,14 @@ const outputPath = path.resolve(__dirname, 'wwwRoot');
 
 const isDebug = process.argv.includes('-d');
 
-const config = {
+const exclude = module => {
+    if (/l4n-common/.test(module)) {
+        return false;
+    }
+    return /node_modules/.test(module);
+};
+
+module.exports = {
     entry: path.resolve(__dirname, 'wwwScript/index.jsx'),
     output: {
         path: outputPath,
@@ -16,7 +23,7 @@ const config = {
         rules: [
             {
                 test: /\.jsx?$/,
-                exclude: /node_modules/,
+                exclude,
                 loader: 'babel-loader',
                 query: {
                     presets: [
@@ -60,9 +67,3 @@ const config = {
         },
     },
 };
-
-if (!isDebug) {
-    config.plugins.push(new webpack.optimize.UglifyJsPlugin());
-}
-
-module.exports = config;

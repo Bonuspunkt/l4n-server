@@ -4,7 +4,15 @@ import DefaultLayout from './layout/Default';
 import CsrfToken from '../component/CsrfToken';
 
 const Register = props => {
-    const { csrfToken } = props;
+    const { user } = props;
+    if (user) {
+        return (
+            <DefaultLayout {...props} title="login">
+                <h1>already logged in</h1>
+            </DefaultLayout>
+        );
+    }
+
     const error = props.error ? <h4 className="error">{props.error}</h4> : <h4>{'\u00a0'}</h4>; // bad hack to make sure the inputs dont "jump"
 
     return (

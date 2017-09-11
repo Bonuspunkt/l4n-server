@@ -5,7 +5,7 @@ import GameHeader from '../component/GameHeader';
 import LobbyDefinition from '../component/LobbyDefinition';
 
 const CreateLobby = props => {
-    const { params, provider, game } = props;
+    const { provider, game } = props;
 
     return (
         <DefaultLayout {...props} title={'Create Lobby'}>

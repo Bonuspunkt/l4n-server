@@ -1,5 +1,3 @@
-const debug = require('debug')('l4n:server:glue:hookupUserToStore');
-
 function hookup(resolve) {
     const userRepo = resolve('userRepo');
     const publicStore = resolve('publicStore');

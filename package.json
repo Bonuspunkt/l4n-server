@@ -42,6 +42,7 @@
   "devDependencies": {
     "eslint": "4.6.1",
     "eslint-plugin-prettier": "^2.2.0",
+    "eslint-plugin-react": "^7.3.0",
     "nodemon": "^1.12.0",
     "prettier": "^1.6.1",
     "puppeteer": "^0.10.2",
@@ -49,6 +50,11 @@
     "webpack-dev-server": "^2.7.1"
   },
   "eslintConfig": {
+    "env": {
+      "es6": true,
+      "node": true,
+      "mocha": true
+    },
     "parserOptions": {
       "ecmaVersion": 2017,
       "ecmaFeatures": {
@@ -56,16 +62,23 @@
         "experimentalObjectRestSpread": true
       }
     },
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended"
+    ],
     "plugins": [
-      "prettier"
+      "prettier",
+      "react"
     ],
     "rules": {
+      "no-unused-vars": ["error", { "vars": "all", "args": "none" }],
       "prettier/prettier": ["error", {
         "printWidth": 100,
         "singleQuote": true,
         "tabWidth": 4,
         "trailingComma": "all"
-      }]
+      }],
+      "react/prop-types": ["warn"]
     }
   },
   "scripts": {

@@ -7,7 +7,7 @@ const UserDisplay = ({ user, displayOnline }) => {
     const { id, name, online } = user;
 
     const onlineState = displayOnline ? (
-        <span className={`userDisplay-${user.online ? 'online' : 'offline'}`} />
+        <span className={`userDisplay-${online ? 'online' : 'offline'}`} />
     ) : (
         undefined
     );

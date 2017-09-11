@@ -6,7 +6,7 @@ import LobbyAction from '../component/LobbyAction';
 import UserDisplay from '../component/UserDisplay';
 
 const Lobby = props => {
-    const { csrfToken, lobbyId, lobbies, providers, user, users } = props;
+    const { lobbyId, lobbies, providers, users } = props;
 
     const lobby = lobbies.find(l => l.id === lobbyId);
     if (!lobby) {

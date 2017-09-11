@@ -30,14 +30,12 @@ const User = props => {
 
 const Header = props => {
     const { lanName } = props;
-    const href = `https://${lanName}.l4n.at`;
-    const name = href.slice(8);
 
     return (
         <header>
             <div className="header">
-                <a className="header-left" href={href}>
-                    {name}
+                <a className="header-left" href="/">
+                    {lanName}
                 </a>
                 <User {...props} />
             </div>

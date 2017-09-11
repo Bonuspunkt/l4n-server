@@ -9,10 +9,13 @@ const FormInput = props => {
         case 'number':
             return <input type="number" name={props.name} />;
         case 'select':
-            const options = props.values.map(value => (
-                <option key={value.name}>{value.name}</option>
-            ));
-            return <select name={props.name}>{options}</select>;
+            return (
+                <select name={props.name}>
+                    {props.values.map(value => <option key={value.name}>{value.name}</option>)}
+                </select>
+            );
+        default:
+            return null;
     }
 };
 
