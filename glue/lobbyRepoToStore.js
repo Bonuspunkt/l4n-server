@@ -44,6 +44,17 @@ function hookup(resolve) {
         }));
     });
 
+    lobbyRepo.on('state', ({ lobbyId, state }) => {
+        debug(`lobby ${lobbyId} state changed to ${state}`);
+
+        publicStore.dispatch(state => ({
+            ...state,
+            lobbies: state.lobbies.map(
+                lobby => (lobby.id === lobbyId ? { ...lobby, state } : lobby),
+            ),
+        }));
+    });
+
     lobbyRepo.on('destroy', lobbyId => {
         debug(`lobby ${lobbyId} destroyed`);
 

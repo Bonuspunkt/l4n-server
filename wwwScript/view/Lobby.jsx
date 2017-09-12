@@ -36,6 +36,7 @@ const Lobby = props => {
             <h1>
                 {lobby.name} <LobbyAction {...props} lobby={lobby} />
             </h1>
+            {lobby.state}
             Players:
             <ul>{usersEls}</ul>
         </DefaultLayout>

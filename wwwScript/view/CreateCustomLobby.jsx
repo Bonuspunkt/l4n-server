@@ -47,7 +47,7 @@ const CreateCustomLobby = props => {
                         placeholder={'# git on sarvar\nlauch game connect'}
                     />
                 </label>
-                <button type="submit">create</button>
+                <button type="submit">create lobby</button>
             </form>
         </DefaultLayout>
     );
