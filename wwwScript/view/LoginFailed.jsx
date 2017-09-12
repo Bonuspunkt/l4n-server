@@ -1,7 +1,6 @@
 import React from 'react';
 
 import DefaultLayout from './layout/Default';
-import Form from '../component/Form';
 
 const Login = props => {
     const { user } = props;

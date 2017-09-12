@@ -70,14 +70,25 @@
       "react"
     ],
     "rules": {
-      "no-unused-vars": ["error", { "vars": "all", "args": "none" }],
-      "prettier/prettier": ["error", {
-        "printWidth": 100,
-        "singleQuote": true,
-        "tabWidth": 4,
-        "trailingComma": "all"
-      }],
-      "react/prop-types": ["warn"]
+      "no-unused-vars": [
+        "error",
+        {
+          "vars": "all",
+          "args": "none"
+        }
+      ],
+      "prettier/prettier": [
+        "error",
+        {
+          "printWidth": 100,
+          "singleQuote": true,
+          "tabWidth": 4,
+          "trailingComma": "all"
+        }
+      ],
+      "react/prop-types": [
+        "warn"
+      ]
     }
   },
   "scripts": {

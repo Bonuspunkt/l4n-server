@@ -24,7 +24,7 @@ const scanner = new UdpScanner(resolve);
 scanner.start();
 //scanner.on('found', resolve('handleScannerFound'));
 
-const Store = new require('./lib/Store');
+const Store = new require('./lib/store');
 const publicStore = new Store('public', {
     lanName: 'vulkan44',
     lobbies: lobbyRepo.allOpen(),

@@ -16,7 +16,7 @@ register('store', () => store);
     store.subscribe(() => debug('changed', store.getState()));
 })();
 
-import WebSocket from './lib/WebSocket';
+import WebSocket from './lib/webSocket';
 const webSocket = new WebSocket(resolve);
 register('webSocket', () => webSocket);
 

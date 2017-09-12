@@ -43,7 +43,7 @@ class WebRTC {
 
             const canvas = document.createElement('canvas');
             document.body.appendChild(canvas);
-            new (require('./streamvisualizer'))(stream, canvas).start();
+            //new (require('./streamvisualizer'))(stream, canvas).start();
 
             audioEl.srcObject = stream;
         });

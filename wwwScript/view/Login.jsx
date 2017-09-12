@@ -19,7 +19,7 @@ const Login = props => {
                 <CsrfToken {...props} />
                 <label>
                     <span>Username</span>
-                    <input type="text" name="username" required autofocus />
+                    <input type="text" name="username" required autoFocus />
                 </label>
                 <label>
                     <span>Password</span>

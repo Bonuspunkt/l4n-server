@@ -14,7 +14,7 @@ const exclude = module => {
 };
 
 module.exports = {
-    entry: path.resolve(__dirname, 'wwwScript/index.jsx'),
+    entry: path.resolve(__dirname, 'wwwScript/main.jsx'),
     output: {
         path: outputPath,
         filename: 'script.js',

@@ -1,5 +1,5 @@
 import React from 'react';
-import route from './lib/Route';
+import route from './lib/route';
 
 import Home from './view/Home';
 import Register from './view/Register';
