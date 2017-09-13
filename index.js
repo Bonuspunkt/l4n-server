@@ -15,14 +15,10 @@ const LobbyRepo = require('./lib/lobbyRepo');
 const lobbyRepo = new LobbyRepo(resolve);
 register('lobbyRepo', () => lobbyRepo);
 
-register('handleScannerFound', require('./glue/handleScannerFound'));
-
-//const TlsClient = require('./lib/tlsClient');
-
 const UdpScanner = require('./lib/udpScanner');
 const scanner = new UdpScanner(resolve);
 scanner.start();
-//scanner.on('found', resolve('handleScannerFound'));
+register('udpScanner', () => scanner);
 
 const Store = new require('./lib/store');
 const publicStore = new Store('public', {
@@ -59,5 +55,6 @@ httpServer.get('*', (req, res) => {
 
 require('./glue/storeToWebSocket')(resolve);
 require('./glue/webSocketToStore')(resolve);
+require('./glue/udpScannerFound')(resolve);
 
 httpServer.listen(8080);

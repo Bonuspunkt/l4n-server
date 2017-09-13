@@ -6,6 +6,13 @@ import CommonMarkInput from '../component/CommonMarkInput';
 
 const CreateCustomLobby = props => {
     const { user } = props;
+    if (!user) {
+        return (
+            <DefaultLayout {...props} title={'Create Custom Lobby'}>
+                <h1>need to login</h1>
+            </DefaultLayout>
+        );
+    }
 
     return (
         <DefaultLayout {...props} title={'Create Custom Lobby'}>

@@ -10,6 +10,7 @@ module.exports = function(resolve) {
         const nextState = reducer(state);
 
         const patch = jDiff.diff(state, nextState);
+        if (!patch.length) return;
         debug(patch);
         webSocketServer.broadcast({ patch });
 

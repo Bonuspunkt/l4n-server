@@ -44,13 +44,13 @@ function hookup(resolve) {
         }));
     });
 
-    lobbyRepo.on('state', ({ lobbyId, state }) => {
-        debug(`lobby ${lobbyId} state changed to ${state}`);
+    lobbyRepo.on('state', ({ lobbyId, state: lobbyState }) => {
+        debug(`lobby ${lobbyId} state changed to ${lobbyState}`);
 
         publicStore.dispatch(state => ({
             ...state,
             lobbies: state.lobbies.map(
-                lobby => (lobby.id === lobbyId ? { ...lobby, state } : lobby),
+                lobby => (lobby.id === lobbyId ? { ...lobby, state: lobbyState } : lobby),
             ),
         }));
     });
