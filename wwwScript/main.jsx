@@ -23,12 +23,5 @@ register('webSocket', () => webSocket);
 import glueWebSocketToStore from './glue/webSocketToStore';
 glueWebSocketToStore(resolve);
 
-import WebRTC from './lib/webRTC';
-const webRTC = new WebRTC(resolve);
-register('webRTC', () => webRTC);
-
-import glueWebSocketToWebRTC from './glue/webSocketToWebRTC';
-glueWebSocketToWebRTC(resolve);
-
 import clientRendering from './glue/clientRendering';
 clientRendering(resolve);
