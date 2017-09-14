@@ -1,10 +1,14 @@
 import React from 'react';
-import './Overlay.styl';
+if (process.env.BROWSER) {
+    require('./Overlay.styl');
+}
+
+const abort = e => e.stopPropagation();
 
 const Overlay = ({ children, onClick }) => {
     return (
         <div className="overlay" onClick={onClick}>
-            {children}
+            <div onClick={abort}>{children}</div>
         </div>
     );
 };
