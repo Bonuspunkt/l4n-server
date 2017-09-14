@@ -23,9 +23,9 @@ register('udpScanner', () => scanner);
 const Store = new require('./lib/store');
 const publicStore = new Store('public', {
     lanName: 'vulkan44',
-    lobbies: lobbyRepo.allOpen(),
+    lobbies: [],
     providers: [],
-    users: userRepo.all(),
+    users: [],
 });
 register('publicStore', () => publicStore);
 

@@ -4,6 +4,11 @@ function hookup(resolve) {
     const lobbyRepo = resolve('lobbyRepo');
     const publicStore = resolve('publicStore');
 
+    publicStore.dispatch(state => ({
+        ...state,
+        lobbies: lobbyRepo.allOpen(),
+    }));
+
     lobbyRepo.on('create', lobby => {
         debug('lobby created', lobby.id, lobby.name);
 
