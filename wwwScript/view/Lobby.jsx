@@ -3,7 +3,22 @@ import React from 'react';
 import DefaultLayout from './layout/Default';
 import GameHeader from '../component/GameHeader';
 import LobbyAction from '../component/LobbyAction';
+import LobbyAdmin from '../component/LobbyAdmin';
+import LobbyPlayers from '../component/LobbyPlayers';
 import UserDisplay from '../component/UserDisplay';
+
+const LobbyState = ({ lobby, user }) => {
+    switch (lobby.state) {
+        case 0:
+            return 'waiting';
+        case 1:
+            return 'ready to launch';
+        case 2:
+            return 'launching';
+        case 3:
+            return 'open';
+    }
+};
 
 const Lobby = props => {
     const { lobbyId, lobbies, providers, users } = props;
@@ -17,28 +32,30 @@ const Lobby = props => {
         );
     }
 
-    const lobbyUsers = lobby.users.map(userId => users.find(u => u.id === userId));
+    const hostUser = users.find(u => u.id === lobby.userId);
     const provider = providers.find(p => p.name === lobby.provider);
     const game = provider ? provider.games.find(g => g.id === lobby.game) : { name: lobby.game };
 
-    const usersEls = lobbyUsers.map(user => (
-        <li key={user.id}>
-            <UserDisplay user={user} displayOnline />
-        </li>
-    ));
+    const host = hostUser ? (
+        <em>
+            <UserDisplay user={hostUser} />
+        </em>
+    ) : (
+        provider.name
+    );
 
     return (
         <DefaultLayout {...props} title={`lobby - ${lobby.name}`}>
             <center>
                 <GameHeader {...game} />
-                <div>hosted by {provider ? provider.name : <em>custom</em>}</div>
+                <div>hosted by {host}</div>
             </center>
             <h1>
                 {lobby.name} <LobbyAction {...props} lobby={lobby} />
             </h1>
-            <div>State {lobby.state}</div>
-            Players:
-            <ul>{usersEls}</ul>
+            <LobbyState {...props} lobby={lobby} />
+            <LobbyAdmin {...props} lobby={lobby} />
+            <LobbyPlayers {...props} lobby={lobby} />
         </DefaultLayout>
     );
 };
