@@ -5,7 +5,9 @@ export default function webSocketToStore(resolve) {
     const webSocket = resolve('webSocket');
     const store = resolve('store');
 
-    webSocket.on('state', state => store.dispatch(() => ({ ...state, url: location.pathname })));
+    webSocket.on('state', ({ state }) =>
+        store.dispatch(() => ({ ...state, url: location.pathname })),
+    );
 
     webSocket.on('patch', ({ patch }) =>
         store.dispatch(state => {

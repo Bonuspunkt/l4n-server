@@ -25,19 +25,7 @@ class WebSocketWrapper extends EventEmitter {
         webSocket.addEventListener('message', message => {
             const data = JSON.parse(message.data);
 
-            if (data.state) {
-                this.emit('state', data.state);
-            } else if (data.offer) {
-                this.emit('offer', data);
-            } else if (data.answer) {
-                this.emit('answer', data);
-            } else if (data.candidate !== undefined) {
-                this.emit('candidate', data);
-            } else if (data.patch) {
-                this.emit('patch', data);
-            } else {
-                this.emit('message', data);
-            }
+            Object.keys(data).forEach(key => this.emit(key, data));
         });
     }
 
