@@ -9,15 +9,44 @@ class LobbyAdmin extends PureComponent {
 
         this.state = { show: true };
         this.handleClose = this.handleClose.bind(this);
+        this.handleShow = this.handleShow.bind(this);
     }
 
     render() {
-        const { props } = this;
         const { lobby, user } = this.props;
 
-        if (lobby.id !== user.id) return null;
+        if (lobby.userId !== user.id) {
+            return null;
+        }
 
+        return (
+            <div>
+                {Array.from(this.renderButtons())}
+                {this.renderPopup()}
+            </div>
+        );
+    }
+
+    *renderButtons(lobby) {
+        const { state } = this.props.lobby;
+
+        yield (
+            <button key="1" type="button" disabled={state !== 1} onClick={this.handleShow}>
+                launching server
+            </button>
+        );
+        yield (
+            <button key="2" type="button" disabled={state !== 2} onClick={this.handleShow}>
+                server launched
+            </button>
+        );
+    }
+
+    renderPopup() {
         if (!this.state.show) return null;
+
+        const { props } = this;
+        const { lobby } = props;
 
         switch (lobby.state) {
             case 0:
@@ -30,7 +59,7 @@ class LobbyAdmin extends PureComponent {
                         <div>
                             <form action={`/lobby/${lobby.id}/changeState`} method="POST">
                                 <CsrfToken {...props} />
-                                <input type="hidden" value="2" />
+                                <input type="hidden" name="" value="2" />
                                 <button type="submit">confirm</button>
                             </form>
                             <button onClick={this.handleClose}>abort</button>
@@ -40,12 +69,24 @@ class LobbyAdmin extends PureComponent {
             case 2:
                 return (
                     <Popup title="Verify join information" onClose={this.handleClose}>
-                        <CommonMarkInput />
+                        <form action={`/lobby/${lobby.id}`} method="POST">
+                            <label className="formField">
+                                <span className="formField-label">connect</span>
+                                <CommonMarkInput
+                                    className="formField-input"
+                                    value={lobby.privateInfo}
+                                />
+                            </label>
+                            <button type="submit">inform users</button>
+                        </form>
                     </Popup>
                 );
         }
     }
 
+    handleShow() {
+        this.setState({ show: true });
+    }
     handleClose() {
         this.setState({ show: false });
     }

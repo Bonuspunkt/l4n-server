@@ -4,6 +4,15 @@ import DefaultLayout from './layout/Default';
 import CsrfToken from '../component/CsrfToken';
 import CommonMarkInput from '../component/CommonMarkInput';
 
+const publicInfoPlaceHolder = `# GameName
+- buy the game
+- install it`;
+const privateInfoPlaceholder = `# join the game
+- launch game
+- server browser
+- find 'my game'
+- password is 'abc'`;
+
 const CreateCustomLobby = props => {
     const { user } = props;
     if (!user) {
@@ -20,13 +29,20 @@ const CreateCustomLobby = props => {
             <form method="POST" action="/lobby/custom">
                 <CsrfToken {...props} />
                 <input type="hidden" name="userId" value={user.id} />
-                <label>
-                    <span>game</span>
-                    <input type="text" name="game" required placeholder="ex. CS:GO" />
-                </label>
-                <label>
-                    <span>lobby name</span>
+                <label className="formField">
+                    <span className="formField-label">game</span>
                     <input
+                        className="formField-input"
+                        type="text"
+                        name="game"
+                        required
+                        placeholder="ex. CS:GO"
+                    />
+                </label>
+                <label className="formField">
+                    <span className="formField-label">lobby name</span>
+                    <input
+                        className="formField-input"
                         type="text"
                         name="name"
                         required
@@ -34,24 +50,41 @@ const CreateCustomLobby = props => {
                     />
                 </label>
                 <h4>spawn conditions</h4>
-                <label>
-                    <span>min players</span>
-                    <input type="number" name="minPlayers" required min="2" />
+                <label className="formField">
+                    <span className="formField-label">min players</span>
+                    <input
+                        className="formField-input"
+                        type="number"
+                        name="minPlayers"
+                        required
+                        min="2"
+                    />
                 </label>
                 <h4>infos</h4>
-                <label>
-                    <span>max players</span>
-                    <input type="number" name="maxPlayers" required min="2" />
+                <label className="formField">
+                    <span className="formField-label">max players</span>
+                    <input
+                        className="formField-input"
+                        type="number"
+                        name="maxPlayers"
+                        required
+                        min="2"
+                    />
                 </label>
-                <label>
-                    <span>info</span>
-                    <CommonMarkInput name="info" placeholder={'# game\n install'} />
-                </label>
-                <label>
-                    <span>connect</span>
+                <label className="formField">
+                    <span className="formField-label">info</span>
                     <CommonMarkInput
-                        name="connect"
-                        placeholder={'# git on sarvar\nlauch game connect'}
+                        className="formField-input"
+                        name="publicInfo"
+                        placeholder={publicInfoPlaceHolder}
+                    />
+                </label>
+                <label className="formField">
+                    <span className="formField-label">connect</span>
+                    <CommonMarkInput
+                        className="formField-input"
+                        name="privateInfo"
+                        placeholder={privateInfoPlaceholder}
                     />
                 </label>
                 <button type="submit">create lobby</button>

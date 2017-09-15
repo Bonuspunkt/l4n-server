@@ -8,7 +8,7 @@ if (process.env.BROWSER) {
 const Logout = props => (
     <form className="inline" method="POST" action="/logout">
         <CsrfToken {...props} />
-        <button type="submit">logout</button>
+        <button className="noPad" type="submit">logout</button>
     </form>
 );
 

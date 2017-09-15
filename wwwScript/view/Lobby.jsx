@@ -4,21 +4,9 @@ import DefaultLayout from './layout/Default';
 import GameHeader from '../component/GameHeader';
 import LobbyAction from '../component/LobbyAction';
 import LobbyAdmin from '../component/LobbyAdmin';
-import LobbyPlayers from '../component/LobbyPlayers';
+import LobbyState from '../component/LobbyState';
+import LobbyUsers from '../component/LobbyUsers';
 import UserDisplay from '../component/UserDisplay';
-
-const LobbyState = ({ lobby, user }) => {
-    switch (lobby.state) {
-        case 0:
-            return 'waiting';
-        case 1:
-            return 'ready to launch';
-        case 2:
-            return 'launching';
-        case 3:
-            return 'open';
-    }
-};
 
 const Lobby = props => {
     const { lobbyId, lobbies, providers, users } = props;
@@ -50,34 +38,27 @@ const Lobby = props => {
                 <GameHeader {...game} />
                 <div>hosted by {host}</div>
             </center>
-            <h1>
-                {lobby.name} <LobbyAction {...props} lobby={lobby} />
-            </h1>
-            <LobbyState {...props} lobby={lobby} />
+            <h1>{lobby.name}</h1>
+
+            <LobbyAction {...props} lobby={lobby} />
             <LobbyAdmin {...props} lobby={lobby} />
-            <LobbyPlayers {...props} lobby={lobby} />
+
+            <label className="formField">
+                <span className="formField-label">Status</span>
+                <input className="formField-input" value={LobbyState({ lobby })} readOnly />
+            </label>
+            <label className="formField">
+                <span className="formField-label">Players</span>
+                <input
+                    className="formField-input"
+                    value={`${lobby.users.length} / ${lobby.minPlayers}-${lobby.maxPlayers}`}
+                    readOnly
+                />
+            </label>
+            <LobbyUsers {...props} lobby={lobby} />
+            <pre>{JSON.stringify(lobby, null, '  ')}</pre>
         </DefaultLayout>
     );
 };
 
 export default Lobby;
-
-/*
-+------------------------------------------------------------------------------+
-|                                                                              |
-|                                 GAME IMAGE                                   |
-|                                                                              |
-+------------------------------------------------------------------------------+
-|            Lobby [Name]                                                      |
-|            State [Waiting / Ready]                                           |
-|          Players [XX/YY] (ZZ Max)                                            |
-|    LobbySettings [XXXXXXXXXXXXXXXXXXXXXXXX]                                  |
-|    LobbySettings [XXXXXXXXXXXXXXXXXXXXXXXX]                                  |
-|    LobbySettings [XXXXXXXXXXXXXXXXXXXXXXXX]                                  |
-|                                                                              |
-|     Players      [XXXXXXXXXXXXXXXXXXXXXXXX]                                  |
-|                  [XXXXXXXXXXXXXXXXXXXXXXXX]                                  |
-|                  [XXXXXXXXXXXXXXXXXXXXXXXX]                                  |
-|                  [XXXXXXXXXXXXXXXXXXXXXXXX]                                  |
-|                                                                              |
-*/
