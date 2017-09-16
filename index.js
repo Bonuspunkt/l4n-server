@@ -20,8 +20,8 @@ const scanner = new UdpScanner(resolve);
 scanner.start();
 register('udpScanner', () => scanner);
 
-const Store = new require('./lib/store');
-const publicStore = new Store('public', {
+const { Store } = require('repatch');
+const publicStore = new Store({
     lanName: 'vulkan44',
     lobbies: [],
     providers: [],
@@ -32,7 +32,7 @@ register('publicStore', () => publicStore);
 require('./glue/lobbyRepoToStore')(resolve);
 require('./glue/userRepoToStore')(resolve);
 
-const privateStore = new Store('private', {
+const privateStore = new Store({
     providers: [],
 });
 register('privateStore', () => privateStore);
