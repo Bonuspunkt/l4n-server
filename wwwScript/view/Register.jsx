@@ -21,19 +21,22 @@ const Register = props => {
             {error}
             <form action="/register" method="POST">
                 <CsrfToken {...props} />
-                <label>
-                    <span>Username</span>
-                    <input type="text" name="username" />
+                <label className="formField">
+                    <span className="formField-label">Username</span>
+                    <input className="formField-input" type="text" name="username" />
                 </label>
-                <label>
-                    <span>Password</span>
-                    <input type="password" name="password1" />
+                <label className="formField">
+                    <span className="formField-label">Password</span>
+                    <input className="formField-input" type="password" name="password1" />
                 </label>
-                <label>
-                    <span>Verify Password</span>
-                    <input type="password" name="password2" />
+                <label className="formField">
+                    <span className="formField-label">Verify Password</span>
+                    <input className="formField-input" type="password" name="password2" />
                 </label>
-                <button type="submit">Register</button>
+                <label className="formField">
+                    <span className="formField-label" />
+                    <button type="submit">Register</button>
+                </label>
             </form>
         </DefaultLayout>
     );
