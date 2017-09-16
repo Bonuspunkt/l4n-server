@@ -8,7 +8,9 @@ if (process.env.BROWSER) {
 const Logout = props => (
     <form className="inline" method="POST" action="/logout">
         <CsrfToken {...props} />
-        <button className="noPad" type="submit">logout</button>
+        <button className="noPad" type="submit">
+            logout
+        </button>
     </form>
 );
 
@@ -29,7 +31,7 @@ const User = props => {
 };
 
 const Header = props => {
-    const { lanName } = props;
+    const { lanName, users } = props;
 
     return (
         <header>
@@ -38,6 +40,7 @@ const Header = props => {
                     {lanName}
                 </a>
                 <User {...props} />
+                Online Users: {users.filter(u => u.online).length}
             </div>
         </header>
     );
