@@ -1,5 +1,5 @@
 const debug = require('debug')('l4n:server:glue:hookStoreToWebSocket');
-const jDiff = require('json-diff-rfc6902');
+const { compare } = require('fast-json-patch');
 
 module.exports = function(resolve) {
     const store = resolve('publicStore');
@@ -9,7 +9,7 @@ module.exports = function(resolve) {
         const state = store.getState();
         const nextState = reducer(state);
 
-        const patch = jDiff.diff(state, nextState);
+        const patch = compare(state, nextState);
         if (!patch.length) return;
         debug(patch);
         webSocketServer.broadcast({ patch });

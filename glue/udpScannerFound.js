@@ -9,8 +9,10 @@ module.exports = function(resolve) {
         }
     }
 
-    const privateStore = resolve('privateStore');
     const publicStore = resolve('publicStore');
+    const privateStore = resolve('privateStore');
+    publicStore.dispatch(state => ({ ...state, providers: []}));
+    privateStore.dispatch(state => ({ ...state, providers: []}));
 
     const merge = entry => state => ({
         ...state,

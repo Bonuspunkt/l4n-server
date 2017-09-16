@@ -1,5 +1,5 @@
 const debug = require('debug')('glue:webSocketToStore');
-import jDiff from 'json-diff-rfc6902';
+import { apply_patch } from 'jsonpatch';
 
 export default function webSocketToStore(resolve) {
     const webSocket = resolve('webSocket');
@@ -9,12 +9,6 @@ export default function webSocketToStore(resolve) {
         store.dispatch(() => ({ ...state, url: location.pathname })),
     );
 
-    webSocket.on('patch', ({ patch }) =>
-        store.dispatch(state => {
-            const newState = { ...state };
-            jDiff.apply(newState, patch);
-            return newState;
-        }),
-    );
+    webSocket.on('patch', ({ patch }) => store.dispatch(state => apply_patch(state, patch)));
     webSocket.on('message', (...args) => debug('undhandled message', ...args));
 }
