@@ -15,7 +15,7 @@ const AvailableServers = props => {
                 <tbody>
                     {servers.map(server => (
                         <AvailableServer
-                            key={server.provider + ':' + server.game}
+                            key={server.provider + ':' + server.game.id}
                             {...server}
                             showOpenLobby={user}
                         />
