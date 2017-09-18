@@ -8,3 +8,4 @@ settings.js
 # generatd file
 wwwRoot/script.js
 wwwRoot/stylesheet.css
+wwwScript/main.jsx
