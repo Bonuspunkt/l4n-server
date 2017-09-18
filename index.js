@@ -15,11 +15,6 @@ const LobbyRepo = require('./lib/lobbyRepo');
 const lobbyRepo = new LobbyRepo(resolve);
 register('lobbyRepo', () => lobbyRepo);
 
-const UdpScanner = require('./lib/udpScanner');
-const scanner = new UdpScanner(resolve);
-scanner.start();
-register('udpScanner', () => scanner);
-
 const { Store } = require('repatch');
 const publicStore = new Store({
     lanName: 'vulkan44',
@@ -43,18 +38,17 @@ register('httpServer', () => httpServer);
 const webSocketServer = require('./lib/webSocketServer')(resolve);
 register('webSocketServer', () => webSocketServer);
 
+// TODO: refactor
 httpServer.get('*', (req, res) => {
-    res.render(
-        'App',
-        Object.assign({ url: req.path }, publicStore.getState(), {
-            user: req.user,
-            csrfToken: req.csrfToken(),
-        }),
-    );
+    res.render('App', {
+        url: req.path,
+        ...publicStore.getState(),
+        user: req.user,
+        csrfToken: req.csrfToken(),
+    });
 });
 
 require('./glue/storeToWebSocket')(resolve);
 require('./glue/webSocketToStore')(resolve);
-require('./glue/udpScannerFound')(resolve);
 
 httpServer.listen(8080);
