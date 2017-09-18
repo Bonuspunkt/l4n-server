@@ -5,7 +5,7 @@ const { resolve } = require('path');
 const { plugins = [] } = require('../settings');
 const requires = plugins.map(plugin => `    require('${plugin}/wwwScript/index'),`).join('\n');
 
-const content = `import 'babel-polyfill';
+const main = `import 'babel-polyfill';
 import 'webrtc-adapter';
 import './core.styl';
 
@@ -20,5 +20,20 @@ ${requires}
 });
 `;
 
-const targetFile = resolve(__dirname, '../wwwScript/main.jsx');
-writeFileSync(targetFile, content);
+const mainFile = resolve(__dirname, '../wwwScript/main.jsx');
+writeFileSync(mainFile, main);
+
+//------------------------------------------------------------------------------
+const requireRoutes = plugins
+    .map(plugin => `    ...require('${plugin}/wwwScript/routes-part'),`)
+    .join('\n');
+const routes = `const routes = [
+    ...require('./routes-part'),
+${requireRoutes}
+];
+
+export default routes;
+`;
+
+const routeFile = resolve(__dirname, '../wwwScript/routes.jsx');
+writeFileSync(routeFile, routes);

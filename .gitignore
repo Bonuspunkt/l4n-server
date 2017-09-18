@@ -9,3 +9,4 @@ settings.js
 wwwRoot/script.js
 wwwRoot/stylesheet.css
 wwwScript/main.jsx
+wwwScript/routes.jsx
