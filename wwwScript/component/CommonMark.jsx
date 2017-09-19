@@ -1,6 +1,10 @@
 import React from 'react';
 import { Parser, HtmlRenderer } from 'commonmark';
 
+if (process.env.BROWSER) {
+    require('./CommonMark.styl');
+}
+
 const reader = new Parser({ safe: true });
 const writer = new HtmlRenderer({ safe: true });
 
