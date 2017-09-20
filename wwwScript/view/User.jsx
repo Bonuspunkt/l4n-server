@@ -6,8 +6,8 @@ import CsrfToken from '../component/CsrfToken';
 import CommonMarkInput from '../component/CommonMarkInput';
 import CommonMark from '../component/CommonMark';
 
-const UserEdit = ({ user, csrfToken }) => (
-    <form action={`/user/${user.id}`} method="POST">
+const UserEdit = ({ displayUser, csrfToken }) => (
+    <form action={`/user/${displayUser.id}`} method="POST">
         <CsrfToken csrfToken={csrfToken} />
         <label className="formField">
             <span className="formField-label">Info</span>
@@ -15,7 +15,7 @@ const UserEdit = ({ user, csrfToken }) => (
                 className="formField-input"
                 autoFocus
                 name="bio"
-                defaultValue={user.bio}
+                defaultValue={displayUser.bio}
             />
         </label>
         <label className="formField">
@@ -34,12 +34,12 @@ UserEdit.propTypes = {
 };
 
 const User = props => {
-    const { userId, user = {}, users, csrfToken } = props;
+    const { userId, user = {}, users } = props;
     const displayUser = users.find(u => u.id === userId);
 
     const body =
         user.id === userId ? (
-            <UserEdit user={displayUser} csrfToken={csrfToken} />
+            <UserEdit {...props} displayUser={displayUser} />
         ) : (
             <CommonMark text={displayUser.bio} />
         );
