@@ -1,5 +1,7 @@
 //import React from 'react';
 
+// TODO: icons - hourglas, ^ >
+
 const LobbyState = ({ lobby }) => {
     switch (lobby.state) {
         case 0:
