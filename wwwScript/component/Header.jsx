@@ -15,16 +15,16 @@ const Logout = props => (
 );
 
 const User = props => {
-    const { user } = props;
+    const { user, className } = props;
     if (user) {
         return (
-            <div className="header-right">
+            <div className={className}>
                 <UserDisplay {...props} /> <Logout {...props} />
             </div>
         );
     }
     return (
-        <div className="header-right">
+        <div className={className}>
             <a href="/login">login</a> <a href="/register">register</a>
         </div>
     );
@@ -33,14 +33,16 @@ const User = props => {
 const Header = props => {
     const { lanName, users } = props;
 
+    const online = users.filter(u => u.online).length;
+
     return (
         <header>
             <div className="header">
-                <a className="header-left" href="/">
-                    {lanName}
-                </a>
-                <User {...props} />
-                Online Users: {users.filter(u => u.online).length}
+                <div className="header-left">
+                    <a href="/">{lanName}</a>
+                </div>
+                <div className="header-center">Online Users: {online}</div>
+                <User {...props} className="header-right" />
             </div>
         </header>
     );

@@ -6,17 +6,23 @@ header
     left: 0
     right: 0
 
-    text-align: center
     padding: 1rem
     background: $color-bg
 
 .header
     margin: auto
     max-width: 50rem
+    display: flex
+
+    & > *
+        flex: 1
 
 .header-left
-    float: left
+    text-align: left
+
+.header-center
+    text-align: center
 
 .header-right
-    float: right
     text-align: right
+
