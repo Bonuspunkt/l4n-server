@@ -2,7 +2,8 @@
 const { Resolver } = require('l4n-common');
 const { register, resolve } = new Resolver();
 
-register('settings', () => require('./settings'));
+const settings = require('./settings');
+register('settings', () => settings);
 
 const db = require('./lib/db')(resolve);
 register('db', () => db);
@@ -16,8 +17,9 @@ const lobbyRepo = new LobbyRepo(resolve);
 register('lobbyRepo', () => lobbyRepo);
 
 const { Store } = require('repatch');
+const { lanName = 'l4n.at' } = settings;
 const publicStore = new Store({
-    lanName: 'vulkan44',
+    lanName,
     lobbies: [],
     providers: [],
     users: [],
@@ -32,14 +34,14 @@ const privateStore = new Store({
 });
 register('privateStore', () => privateStore);
 
-const httpServer = require('./lib/httpServer')(resolve);
-register('httpServer', () => httpServer);
+const app = require('./lib/app')(resolve);
+register('app', () => app);
 
 const webSocketServer = require('./lib/webSocketServer')(resolve);
 register('webSocketServer', () => webSocketServer);
 
-// TODO: refactor
-httpServer.get('*', (req, res) => {
+// TODO: refactor, needs to be last route
+app.get('*', (req, res) => {
     res.render('App', {
         url: req.path,
         ...publicStore.getState(),
@@ -51,4 +53,5 @@ httpServer.get('*', (req, res) => {
 require('./glue/storeToWebSocket')(resolve);
 require('./glue/webSocketToStore')(resolve);
 
-httpServer.listen(8080);
+const { httpServer: { port = 8080 } } = settings;
+app.listen(port);
