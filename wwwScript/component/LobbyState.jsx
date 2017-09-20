@@ -5,11 +5,9 @@ const LobbyState = ({ lobby }) => {
         case 0:
             return 'waiting';
         case 1:
-            return 'ready to launch';
-        case 2:
             return 'launching';
-        case 3:
-            return 'open';
+        case 2:
+            return 'running';
     }
 };
 

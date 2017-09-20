@@ -50,7 +50,7 @@ export default function(resolve) {
         }
 
         const form = e.target;
-        const url = form.action;
+        const url = form.getAttribute('action');
         if (!parse(url)) {
             return;
         }

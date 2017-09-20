@@ -6,7 +6,7 @@ import routes from './routes';
 
 import NotMapped from './view/NotMapped';
 
-routes.map(({ pattern, Component }) => ({
+const mappedRoutes = routes.map(({ pattern, Component }) => ({
     test: route(pattern),
     Component,
 }));
@@ -14,7 +14,7 @@ routes.map(({ pattern, Component }) => ({
 const App = props => {
     const { url } = props;
 
-    for (let { test, Component } of routes) {
+    for (let { test, Component } of mappedRoutes) {
         const urlParams = test(url);
         if (urlParams) {
             return <Component {...props} {...urlParams} />;

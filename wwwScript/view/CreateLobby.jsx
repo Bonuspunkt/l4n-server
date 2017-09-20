@@ -7,11 +7,6 @@ import CommonMarkInput from '../component/CommonMarkInput';
 const publicInfoPlaceHolder = `# GameName
 - buy the game
 - install it`;
-const privateInfoPlaceholder = `# join the game
-- launch game
-- server browser
-- find 'my game'
-- password is 'abc'`;
 
 const CreateLobby = props => {
     const { user } = props;
@@ -57,7 +52,7 @@ const CreateLobby = props => {
                         type="number"
                         name="minPlayers"
                         required
-                        min="2"
+                        min="1"
                     />
                 </label>
                 <h4>infos</h4>
@@ -77,14 +72,6 @@ const CreateLobby = props => {
                         className="formField-input"
                         name="publicInfo"
                         placeholder={publicInfoPlaceHolder}
-                    />
-                </label>
-                <label className="formField">
-                    <span className="formField-label">connect</span>
-                    <CommonMarkInput
-                        className="formField-input"
-                        name="privateInfo"
-                        placeholder={privateInfoPlaceholder}
                     />
                 </label>
                 <label className="formField">

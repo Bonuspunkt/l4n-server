@@ -7,8 +7,9 @@ const ActionButton = props => {
     const { lobby, action } = props;
 
     return (
-        <form method="POST" action={`/lobby/${lobby.id}/${action}`}>
+        <form className="inline" method="POST" action={`/lobby/${lobby.id}`}>
             <CsrfToken {...props} />
+            <input type="hidden" name="action" value={action} />
             <button type="submit">{action}</button>
         </form>
     );
