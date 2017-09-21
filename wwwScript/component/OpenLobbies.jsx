@@ -60,7 +60,7 @@ const OpenNewLobby = ({ lobbies, user }) => {
 
     return (
         <a className="button" href="/lobby/custom">
-            Open Custom Lobby
+            Open Lobby
         </a>
     );
 };
