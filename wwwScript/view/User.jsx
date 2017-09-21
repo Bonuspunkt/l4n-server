@@ -41,7 +41,7 @@ const User = props => {
         user.id === userId ? (
             <UserEdit {...props} displayUser={displayUser} />
         ) : (
-            <CommonMark text={displayUser.bio} />
+            <CommonMark text={displayUser.bio || ''} />
         );
 
     return (

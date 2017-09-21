@@ -19,7 +19,9 @@ function hookup(resolve) {
     userRepo.on('change', user => {
         publicStore.dispatch(state => ({
             ...state,
-            users: state.users.map(u => (u.id === user.id ? cleanUser(user) : u)),
+            users: state.users.map(u => {
+                return u.id === user.id ? { ...u, ...cleanUser(user) } : u;
+            }),
         }));
     });
 }
