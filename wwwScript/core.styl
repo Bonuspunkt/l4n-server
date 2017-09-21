@@ -42,6 +42,11 @@ button, .button
         background-color: darken($color-bg, 20)
         color: darken($color-text, 20)
 
+    &.danger
+        background-color: $danger-bg
+        &:hover
+            background-color: lighten($danger-bg, 20)
+
 .button
     display: inline-block
 //------------------------------------------------------------------------------

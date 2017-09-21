@@ -4,13 +4,13 @@ import PropTypes from 'proptypes';
 import CsrfToken from './CsrfToken';
 
 const ActionButton = props => {
-    const { lobby, action } = props;
+    const { lobby, action, className } = props;
 
     return (
         <form className="inline" method="POST" action={`/lobby/${lobby.id}`}>
             <CsrfToken {...props} />
             <input type="hidden" name="action" value={action} />
-            <button type="submit">{action}</button>
+            <button className={className} type="submit">{action}</button>
         </form>
     );
 };
@@ -25,7 +25,7 @@ const LobbyAction = props => {
         if (participatingLobby.id !== lobby.id) return null;
 
         if (lobby.userId === user.id) {
-            return <ActionButton {...props} lobby={lobby} action="destroy" />;
+            return <ActionButton {...props} className="danger" lobby={lobby} action="destroy" />;
         } else if (lobby.users.some(userId => userId === user.id)) {
             return <ActionButton {...props} lobby={lobby} action="leave" />;
         }
