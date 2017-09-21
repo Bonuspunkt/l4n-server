@@ -16,7 +16,7 @@ const Lobby = props => {
     if (!lobby) {
         return (
             <DefaultLayout {...props} title={`lobby - destroyed`}>
-                could not find lobby
+                could not find lobby, maybe it was destroyed by its owner
             </DefaultLayout>
         );
     }
@@ -34,8 +34,10 @@ const Lobby = props => {
             </center>
             <h1>{lobby.name}</h1>
 
-            <LobbyAction {...props} lobby={lobby} />
-            <LobbyAdmin {...props} lobby={lobby} />
+            <div className="">
+                <LobbyAction {...props} lobby={lobby} />
+                <LobbyAdmin {...props} lobby={lobby} />
+            </div>
 
             <label className="formField">
                 <span className="formField-label">Status</span>
