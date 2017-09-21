@@ -1,7 +1,10 @@
 {
   "name": "l4n-server",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "```ps\r $env:DEBUG = \"l4n:*\"\r ```",
+  "bin": {
+    "l4n-server": "./bin/l4n-server.js"
+  },
   "main": "index.js",
   "dependencies": {
     "babel-core": "^6.26.0",
@@ -41,14 +44,13 @@
     "webrtc-adapter": "^5.0.4"
   },
   "devDependencies": {
-    "eslint": "4.7.0",
-    "eslint-plugin-prettier": "^2.2.0",
+    "eslint": "4.7.1",
+    "eslint-plugin-prettier": "^2.3.1",
     "eslint-plugin-react": "^7.3.0",
     "nodemon": "^1.12.1",
     "prettier": "^1.7.0",
-    "puppeteer": "^0.10.2",
-    "tap": "^10.7.2",
-    "webpack-dev-server": "^2.8.2"
+    "puppeteer": "^0.11.0",
+    "tap": "^10.7.2"
   },
   "eslintConfig": {
     "env": {
@@ -93,7 +95,6 @@
     }
   },
   "scripts": {
-    "dev-web": "webpack-dev-server -d",
     "dev-svr": "nodemon",
     "lint": "eslint --ignore-path .gitignore --ext js,jsx  .",
     "prod": "webpack -p",
@@ -106,5 +107,13 @@
     "lib": "lib",
     "test": "test"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bonuspunkt/l4n-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Bonuspunkt/l4n-server/issues"
+  },
+  "homepage": "https://github.com/Bonuspunkt/l4n-server#readme"
 }

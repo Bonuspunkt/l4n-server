@@ -55,13 +55,4 @@ module.exports = {
         }),
         new ExtractTextPlugin('stylesheet.css', { allChunks: true }),
     ],
-
-    // NOTE: broken with websockets
-    devServer: {
-        contentBase: resolve(__dirname, 'wwwRoot'),
-        port: 8081,
-        proxy: {
-            '/': 'http://localhost:8080/',
-        },
-    },
 };
