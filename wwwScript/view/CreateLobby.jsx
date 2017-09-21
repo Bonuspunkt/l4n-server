@@ -4,9 +4,9 @@ import DefaultLayout from './layout/Default';
 import CsrfToken from '../component/CsrfToken';
 import CommonMarkInput from '../component/CommonMarkInput';
 
-const publicInfoPlaceHolder = `# GameName
-- buy the game
-- install it`;
+const publicInfoDefaultValue = `- buy the game
+- install it
+- be ready`;
 
 const CreateLobby = props => {
     const { user } = props;
@@ -71,7 +71,7 @@ const CreateLobby = props => {
                     <CommonMarkInput
                         className="formField-input"
                         name="publicInfo"
-                        placeholder={publicInfoPlaceHolder}
+                        defaultValue={publicInfoDefaultValue}
                     />
                 </label>
                 <label className="formField">
