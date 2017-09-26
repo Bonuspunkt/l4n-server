@@ -19,8 +19,8 @@ const CreateLobby = props => {
     }
 
     return (
-        <DefaultLayout {...props} title={'Create Custom Lobby'}>
-            <h1>create custom lobby</h1>
+        <DefaultLayout {...props} title={'Create Lobby'}>
+            <h1>create lobby</h1>
             <form method="POST" action="/lobby/custom">
                 <CsrfToken {...props} />
                 <input type="hidden" name="userId" value={user.id} />
@@ -35,16 +35,25 @@ const CreateLobby = props => {
                     />
                 </label>
                 <label className="formField">
+                    <span className="formField-label">mode</span>
+                    <input
+                        className="formField-input"
+                        type="text"
+                        name="mode"
+                        placeholder="ex. Arms Race"
+                    />
+                </label>
+                <label className="formField">
                     <span className="formField-label">lobby name</span>
                     <input
                         className="formField-input"
                         type="text"
                         name="name"
                         required
-                        placeholder="ex. casual real life simulator 2020"
+                        placeholder="ex. real life simulator 2020"
                     />
                 </label>
-                <h4>spawn conditions</h4>
+                <h3>spawn conditions</h3>
                 <label className="formField">
                     <span className="formField-label">min players</span>
                     <input
@@ -55,7 +64,7 @@ const CreateLobby = props => {
                         min="1"
                     />
                 </label>
-                <h4>infos</h4>
+                <h3>infos</h3>
                 <label className="formField">
                     <span className="formField-label">max players</span>
                     <input

@@ -4,9 +4,7 @@ import GameDisplay from './GameDisplay';
 import LobbyAction from './LobbyAction';
 import LobbyState from './LobbyState';
 
-if (process.env.BROWSER) {
-    require('./OpenLobbies.styl');
-}
+if (process.env.BROWSER) require('./OpenLobbies.styl');
 
 const LobbyUserCount = ({ lobby }) => {
     if (lobby.minPlayers === lobby.maxPlayers) {
@@ -26,7 +24,7 @@ const LobbyType = ({ lobby }) => {
 
 const LobbyRow = props => {
     const { lobby } = props;
-    const { id, name } = lobby;
+    const { id, name, mode } = lobby;
 
     return (
         <li className="lobbyRow">
@@ -36,6 +34,7 @@ const LobbyRow = props => {
             <div className="lobbyRow-game">
                 <GameDisplay {...props} />
             </div>
+            <div className="lobbyRow-mode">{mode}</div>
             <div className="lobbyRow-name">
                 <a href={`/lobby/${id}`}>{name}</a>
             </div>
@@ -79,6 +78,7 @@ const OpenLobbies = props => {
                 <li className="lobbyRow lobbyRowHeader">
                     <div className="lobbyRow-type" />
                     <div className="lobbyRow-game">Game</div>
+                    <div className="lobbyRow-mode">Mode</div>
                     <div className="lobbyRow-name">Lobby</div>
                     <div className="lobbyRow-players">Players</div>
                     <div className="lobbyRow-state">State</div>
