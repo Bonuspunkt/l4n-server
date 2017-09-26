@@ -1,0 +1,9 @@
+// generated file do not modify
+import { Resolver } from 'l4n-common';
+const resolver = new Resolver();
+
+[
+${modules}
+].forEach(plugin => {
+    plugin(resolver);
+});

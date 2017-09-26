@@ -20,7 +20,7 @@ npm install l4n-server [additional l4n-server-modules]
 npx l4n-server init
 # edit ./settings.js
 npx l4n-server build
-npx l4n-server start
+node index.js
 ```
 
 

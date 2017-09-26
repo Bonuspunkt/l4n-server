@@ -1,0 +1,17 @@
+    db: {
+        //filePath: resolve(__dirname, 'core.db'),
+    },
+
+    httpServer: {
+        //port: 8080,
+        wwwRoot: resolve(__dirname, 'wwwRoot'),
+
+        session: {
+            secret: 'replaceMe', // replace a random string
+        },
+
+        sessionStore: {
+            db: 'session.db',
+            dir: __dirname,
+        },
+    },

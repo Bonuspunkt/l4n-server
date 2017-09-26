@@ -1,0 +1,11 @@
+// all comments out lines are default values
+const { readFileSync } = require('fs');
+const { resolve } = require('path');
+
+module.exports = {
+    //lanName: 'l4n.at',
+    use: [
+${modules}
+    ],
+${moduleConfigs}
+};

@@ -1,11 +1,17 @@
+import 'babel-polyfill';
+import 'webrtc-adapter';
+import './core.styl';
+
 import Store from 'repatch';
 import Notifier from './lib/Notifier';
 import WebSocket from './lib/webSocket';
+
 import glueWebSocketToStore from './glue/webSocketToStore';
 import clientRendering from './glue/clientRendering';
 import glueStoreToNotifier from './glue/storeToNotifier';
 
 const init = ({ resolve, register }) => {
+    // register
     register('loggedIn', () => () => !!store.getState().user);
 
     const store = new Store({ url: location.pathname });
@@ -22,6 +28,7 @@ const init = ({ resolve, register }) => {
     const webSocket = new WebSocket(resolve);
     register('webSocket', () => webSocket);
 
+    // glue
     glueWebSocketToStore(resolve);
     glueStoreToNotifier(resolve);
 

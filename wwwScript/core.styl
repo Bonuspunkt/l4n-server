@@ -49,6 +49,7 @@ button, .button
 
 .button
     display: inline-block
+    text-align: center
 //------------------------------------------------------------------------------
 
 table
@@ -72,6 +73,9 @@ table
 .inline
     display: inline-block
 
+//------------------------------------------------------------------------------
+input, select, textarea
+    border: .1rem solid $text
 
 //------------------------------------------------------------------------------
 $borderWidth = .1rem
@@ -95,12 +99,11 @@ $padding-h = .5rem
 
 .formField-input
     padding: $padding-v
-    border-color: $text
     font-size: 1rem
     color: $text
     width: 35rem
 
-.formField-input:read-only
+.formField-input[readonly]
     border-color: transparent
 
 .formField-error

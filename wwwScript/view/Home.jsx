@@ -2,16 +2,14 @@ import React from 'react';
 
 import DefaultLayout from './layout/Default';
 
-import OpenLobbies from '../component/OpenLobbies';
-// import AvailableServers from '../component/AvailableServers';
-// <AvailableServers {...props} />
+import viewRegistry from '../lib/viewRegistry';
 
 const Home = props => {
-    return (
-        <DefaultLayout {...props}>
-            <OpenLobbies {...props} />
-        </DefaultLayout>
-    );
+    const items = viewRegistry
+        .resolve('home')
+        .map(Component => <Component key={Component.name} {...props} />);
+
+    return <DefaultLayout {...props}>{items}</DefaultLayout>;
 };
 
 export default Home;

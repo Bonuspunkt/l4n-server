@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import route from './lib/route';
 
-import routes from './routes';
+import routes from '*routes';
 
 import NotMapped from './view/NotMapped';
 

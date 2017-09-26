@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+const { Resolver } = require('l4n-common');
+
+const resolver = new Resolver();
+
+const settings = require('./settings');
+resolver.register('settings', () => settings);
+
+resolver.register('appView', () => require('./wwwScript/App').default);
+
+const { use: plugins = [] } = settings;
+plugins.map(plugin => require(plugin)).forEach(plugin => plugin(resolver));

@@ -1,3 +1,8 @@
+import viewRegistry from './lib/viewRegistry';
+import OpenLobbies from './component/OpenLobbies';
+// build view?
+viewRegistry.register('home', OpenLobbies);
+
 import Home from './view/Home';
 import Register from './view/Register';
 import Registered from './view/Registered';

@@ -1,7 +1,6 @@
 {
   "name": "l4n-server",
-  "version": "0.1.0",
-  "description": "```ps\r $env:DEBUG = \"l4n:*\"\r ```",
+  "version": "0.2.0",
   "bin": {
     "l4n-server": "./bin/l4n-server.js"
   },
@@ -15,7 +14,6 @@
     "babel-preset-react": "^6.24.1",
     "better-sqlite3": "^4.0.2",
     "body-parser": "^1.18.1",
-    "chai": "^4.1.2",
     "commonmark": "^0.28.1",
     "connect-sqlite3": "^0.9.10",
     "css-loader": "^0.28.7",
@@ -44,10 +42,11 @@
     "webrtc-adapter": "^5.0.4"
   },
   "devDependencies": {
-    "eslint": "4.7.1",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "eslint": "^4.7.1",
     "eslint-plugin-prettier": "^2.3.1",
     "eslint-plugin-react": "^7.3.0",
-    "nodemon": "^1.12.1",
     "prettier": "^1.7.0",
     "puppeteer": "^0.11.0",
     "tap": "^10.7.2"
@@ -95,12 +94,8 @@
     }
   },
   "scripts": {
-    "dev-svr": "nodemon",
     "lint": "eslint --ignore-path .gitignore --ext js,jsx  .",
-    "prod": "webpack -p",
-    "watch": "webpack -d -w",
-    "test": "tap lib/**.test.js wwwScript/lib/**.test.js",
-    "webTest": "tap test/**.js"
+    "test": "tap lib/**.test.js wwwScript/lib/**.test.js"
   },
   "author": "Bonuspunkt",
   "directories": {
