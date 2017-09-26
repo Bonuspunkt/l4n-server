@@ -1,8 +1,7 @@
 import React from 'react';
 
 import DefaultLayout from './layout/Default';
-import GameHeader from '../component/GameHeader';
-import Hoster from '../component/Hoster';
+import LobbyHeader from '../component/LobbyHeader';
 import LobbyAction from '../component/LobbyAction';
 import LobbyAdmin from '../component/LobbyAdmin';
 import LobbyState from '../component/LobbyState';
@@ -10,7 +9,7 @@ import LobbyUsers from '../component/LobbyUsers';
 import CommonMark from '../component/CommonMark';
 
 const Lobby = props => {
-    const { lobbyId, lobbies, providers } = props;
+    const { lobbyId, lobbies } = props;
 
     const lobby = lobbies.find(l => l.id === lobbyId);
     if (!lobby) {
@@ -21,18 +20,9 @@ const Lobby = props => {
         );
     }
 
-    const provider = providers.find(p => p.name === lobby.provider);
-    const game = provider ? provider.games.find(g => g.id === lobby.game) : { name: lobby.game };
-
     return (
         <DefaultLayout {...props} title={`lobby - ${lobby.name}`}>
-            <center>
-                <GameHeader {...game} />
-                <div>
-                    hosted by <Hoster {...props} lobby={lobby} />
-                </div>
-            </center>
-            <h1>{lobby.name}</h1>
+            <LobbyHeader {...props} lobby={lobby} />
 
             <div className="">
                 <LobbyAction {...props} lobby={lobby} />
