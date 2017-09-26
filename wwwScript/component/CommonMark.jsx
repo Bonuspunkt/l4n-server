@@ -9,12 +9,12 @@ if (process.env.BROWSER) {
 const reader = new Parser({ safe: true });
 const writer = new HtmlRenderer({ safe: true });
 
-const CommonMark = ({ text }) => {
+const CommonMark = ({ className = '', text }) => {
     const ast = reader.parse(text);
 
     const innerHTML = { __html: writer.render(ast) };
 
-    return <div className="commonMark" dangerouslySetInnerHTML={innerHTML} />;
+    return <div className={`commonMark ${className}`} dangerouslySetInnerHTML={innerHTML} />;
 };
 
 CommonMark.propTypes = {
