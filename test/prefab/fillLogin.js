@@ -7,7 +7,7 @@ async function fillLogin({ page, username, password }) {
     if (password) {
         await page.type(password);
     }
-    await page.click('form[action="/auth/local"] button[type="submit"]');
+    await page.click('form[action="/login"] button[type="submit"]');
 }
 
 module.exports = fillLogin;

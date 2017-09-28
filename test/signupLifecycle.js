@@ -71,8 +71,7 @@ describe('register/login/logout', () => {
 
         await page.waitForNavigation({ timeout, waitUntil: 'load' });
         expect(page.url()).to.equal(registerUrl);
-        const errorEl = await page.$('h4.error');
-        const actualErrorMessage = await errorEl.evaluate(el => el.textContent);
+        const actualErrorMessage = await page.evaluate(`document.querySelector('h4.error').textContent`);
         expect(actualErrorMessage).to.equal(errorMessage);
     }
 
