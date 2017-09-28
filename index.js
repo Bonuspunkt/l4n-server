@@ -36,24 +36,9 @@ module.exports = ({ register, resolve }) => {
     require('./glue/webSocketToStore')(resolve);
 
     // TODO: refactor, needs to be last route
-    const React = require('react');
-    const ReactDOMServer = require('react-dom/server');
-    app.get('*', (req, res) => {
-        const App = resolve('appView');
-        const body =
-            '<!DOCTYPE html>' +
-            ReactDOMServer.renderToStaticMarkup(
-                React.createElement(App, {
-                    url: req.path,
-                    ...publicStore.getState(),
-                    user: req.user,
-                    csrfToken: req.csrfToken(),
-                }),
-            );
-
-        res.writeHead(200, { 'content-type': 'text/html' });
-        res.end(body);
-    });
+    const renderView = require('./lib/renderView')(resolve);
+    register('renderView', () => renderView);
+    app.get('*', renderView());
     // !!!
 
     const { httpServer: { port = 8080 } } = resolve('settings');
