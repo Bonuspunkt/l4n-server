@@ -4,7 +4,7 @@ if (process.env.BROWSER) require('./Notifier.styl');
 class Notifier {
     constructor(resolve) {
         if (Notification.permission === 'default') {
-            const el = document.createElement('div');
+            const el = document.createElement('button');
             el.className = 'noficationRequest';
             el.textContent = 'enable notifications';
             el.addEventListener('click', e => this.requirePermission());
