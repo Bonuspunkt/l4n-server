@@ -5,7 +5,7 @@ const typePattern = type => {
         case 'any':
             return '.+';
         case 'number':
-            return '\\d+';
+            return '-?\\d+';
         default:
             return '[^/]+';
     }
