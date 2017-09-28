@@ -26,6 +26,9 @@ module.exports = ({ register, resolve }) => {
     const privateStore = new Store({});
     register('privateStore', () => privateStore);
 
+    const renderView = require('./lib/renderView')(resolve);
+    register('renderView', () => renderView);
+
     const app = require('./lib/app')(resolve);
     register('app', () => app);
 
@@ -36,8 +39,6 @@ module.exports = ({ register, resolve }) => {
     require('./glue/webSocketToStore')(resolve);
 
     // TODO: refactor, needs to be last route
-    const renderView = require('./lib/renderView')(resolve);
-    register('renderView', () => renderView);
     app.get('*', renderView());
     // !!!
 
