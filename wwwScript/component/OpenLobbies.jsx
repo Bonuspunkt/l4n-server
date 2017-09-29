@@ -1,6 +1,5 @@
 import React from 'react';
 
-import GameDisplay from './GameDisplay';
 import lobbyActionRegistry from '../lib/lobbyActionRegistry';
 import LobbyState from './LobbyState';
 
@@ -12,19 +11,16 @@ const LobbyUserCount = ({ lobby }) => {
     }
     return `${lobby.users.length} / ${lobby.minPlayers}-${lobby.maxPlayers}`;
 };
-const LobbyType = ({ lobby }) => {
-    if (lobby.userId) {
+const LobbyType = ({ lobby: { userId } }) => {
+    if (userId > 0) {
         return 'U';
     }
-    if (lobby.provider) {
-        return 'P';
-    }
-    return '?';
+    return 'S';
 };
 
 const LobbyRow = props => {
     const { lobby } = props;
-    const { id, name, mode } = lobby;
+    const { id, game, mode, name } = lobby;
 
     return (
         <li className="lobbyRow">
@@ -32,9 +28,9 @@ const LobbyRow = props => {
                 <LobbyType {...props} />
             </div>
             <div className="lobbyRow-game">
-                <GameDisplay {...props} />
+                {game}
+                <small>{mode}</small>
             </div>
-            <div className="lobbyRow-mode">{mode}</div>
             <div className="lobbyRow-name">
                 <a href={`/lobby/${id}`}>{name}</a>
             </div>
@@ -78,13 +74,11 @@ const OpenLobbies = props => {
                 <li className="lobbyRow lobbyRowHeader">
                     <div className="lobbyRow-type" />
                     <div className="lobbyRow-game">Game</div>
-                    <div className="lobbyRow-mode">Mode</div>
                     <div className="lobbyRow-name">Lobby</div>
                     <div className="lobbyRow-players">Players</div>
                     <div className="lobbyRow-state">State</div>
                     <div className="lobbyRow-action" />
                 </li>
-
                 {lobbyDisplays}
             </ul>
             <OpenNewLobby {...props} />

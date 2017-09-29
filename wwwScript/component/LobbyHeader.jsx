@@ -9,14 +9,6 @@ const LobbyHeader = ({ lobby, providers, users }) => {
     const provider = providers.find(p => p.name === lobby.provider);
     const user = users.find(u => u.id === lobby.userId);
 
-    const game = provider ? provider.games.find(game => lobby.gameId) : { name: lobby.game };
-
-    const gameEl = game.steamId ? (
-        <a href={`http://store.steampowered.com/app/${game.steamId}/`}>{game.name}</a>
-    ) : (
-        game.name
-    );
-
     const hosterEl = user ? (
         <em>
             <UserDisplay user={user} />
@@ -27,7 +19,7 @@ const LobbyHeader = ({ lobby, providers, users }) => {
 
     return (
         <div className="lobbyHeader">
-            <h2>{gameEl}</h2>
+            <h2>{lobby.game}</h2>
             <h3>{lobby.mode}</h3>
             hosted by {hosterEl}
             <h1>{lobby.name}</h1>
