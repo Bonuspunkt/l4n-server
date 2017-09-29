@@ -40,15 +40,9 @@ function hookup(resolve) {
             const lobby = lobbies.find(l => l.id === lobbyId);
             const users = lobby.users.filter(user => user !== userId);
 
-            if (users.length) {
-                return {
-                    ...state,
-                    lobbies: lobbies.map(l => (l.id === lobbyId ? { ...lobby, users } : l)),
-                };
-            }
             return {
                 ...state,
-                lobbies: lobbies.filter(l => l.id !== lobbyId),
+                lobbies: lobbies.map(l => (l.id === lobbyId ? { ...lobby, users } : l)),
             };
         });
     });
