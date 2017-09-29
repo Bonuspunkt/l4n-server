@@ -2,8 +2,7 @@ import React from 'react';
 
 import DefaultLayout from './layout/Default';
 import LobbyHeader from '../component/LobbyHeader';
-import LobbyAction from '../component/LobbyAction';
-import LobbyAdmin from '../component/LobbyAdmin';
+import LobbyActionBar from '../component/LobbyActionBar';
 import LobbyState from '../component/LobbyState';
 import LobbyUsers from '../component/LobbyUsers';
 import CommonMark from '../component/CommonMark';
@@ -24,10 +23,7 @@ const Lobby = props => {
         <DefaultLayout {...props} title={`lobby - ${lobby.name}`}>
             <LobbyHeader {...props} lobby={lobby} />
 
-            <div className="">
-                <LobbyAction {...props} lobby={lobby} />
-                <LobbyAdmin {...props} lobby={lobby} />
-            </div>
+            <LobbyActionBar {...props} lobby={lobby} />
 
             <label className="formField">
                 <span className="formField-label">Status</span>

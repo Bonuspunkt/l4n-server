@@ -1,7 +1,7 @@
 import React from 'react';
 
 import GameDisplay from './GameDisplay';
-import LobbyAction from './LobbyAction';
+import lobbyActionRegistry from '../lib/lobbyActionRegistry';
 import LobbyState from './LobbyState';
 
 if (process.env.BROWSER) require('./OpenLobbies.styl');
@@ -45,7 +45,7 @@ const LobbyRow = props => {
                 <LobbyState lobby={lobby} />
             </div>
             <div className="lobbyRow-action">
-                <LobbyAction {...props} lobby={lobby} />
+                {lobbyActionRegistry.getMainAction({ ...props, lobby })}
             </div>
         </li>
     );

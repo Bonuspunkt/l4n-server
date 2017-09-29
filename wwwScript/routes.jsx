@@ -3,6 +3,13 @@ import OpenLobbies from './component/OpenLobbies';
 // build view?
 viewRegistry.register('home', OpenLobbies);
 
+import React from 'react';
+import lobbyActionRegistry from './lib/lobbyActionRegistry';
+import SpawnServerButton from './component/SpawnServerButton';
+import SpawnedServerButton from './component/SpawnedServerButton';
+lobbyActionRegistry.register(props => <SpawnServerButton key="spawnServer" {...props} />);
+lobbyActionRegistry.register(props => <SpawnedServerButton key="spawnedServer" {...props} />);
+
 import Home from './view/Home';
 import Register from './view/Register';
 import Registered from './view/Registered';
