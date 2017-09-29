@@ -23,7 +23,7 @@ class CommonMarkInput extends PureComponent {
     }
 
     render() {
-        const { className } = this.props;
+        const { className = '' } = this.props;
         const { expanded } = this.state;
 
         const workValue = this.props.value || this.state.value || '';
