@@ -1,8 +1,12 @@
 const debug = require('debug')('l4n:notifier');
 if (process.env.BROWSER) require('./Notifier.styl');
 
+const { Notification } = window;
+
 class Notifier {
     constructor(resolve) {
+        if (!Notification) return;
+
         if (Notification.permission === 'default') {
             const el = document.createElement('button');
             el.className = 'noficationRequest';
@@ -15,6 +19,8 @@ class Notifier {
     }
 
     requirePermission() {
+        if (!Notification) return;
+
         Notification.requestPermission()
             .then(result => debug(result))
             .catch(err => debug(err))
@@ -22,6 +28,8 @@ class Notifier {
     }
 
     notify({ title, body, url }) {
+        if (!Notification) return;
+
         const notification = new Notification(title, {
             body,
             icon: '/static/svg/logo.svg',
