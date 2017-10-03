@@ -34,6 +34,7 @@ export default function storeToNotifier(resolve) {
             notifier.notify({
                 title: newLobby.name,
                 body: 'join the game',
+                url: `/lobby/${newLobby.id}`,
             });
         }
 
