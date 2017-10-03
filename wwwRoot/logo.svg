@@ -1,7 +1,7 @@
 <svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 16 16" height="80" width="80">
   <!-- L -->
-  <path d="M0 4 L0 12 L5.5 12 L5.5 9 L2 9 L3 4 Z" fill="black" />
+  <path d="M1 4 L-1 12 L5.5 12 L5.5 9 L3 9 L4.5 4 Z" fill="black" />
   <!-- N -->
   <path d="M8 12 L10 4 L13 4 L13.5 6 L14 4 L17 4 L15 12 L12 12 L11.5 10 L11 12 " />
 
