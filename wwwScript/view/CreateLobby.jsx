@@ -31,6 +31,7 @@ const CreateLobby = props => {
                         type="text"
                         name="game"
                         required
+                        autoFocus
                         placeholder="ex. CS:GO"
                     />
                 </label>

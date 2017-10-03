@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint no-console: 0 */
 const debug = require('debug')('l4n:server:cli');
 const fs = require('fs');
 const path = require('path');
@@ -133,7 +134,6 @@ function build() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/* eslint no-console: 0 */
 function printUsage() {
     console.log('usage:');
     console.log('');

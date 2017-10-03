@@ -29,7 +29,8 @@ class SpawnServerButton extends PureComponent {
                 key="spawnServer"
                 type="button"
                 disabled={state !== STATE.WAITING}
-                onClick={this.handleShow}>
+                onClick={this.handleShow}
+            >
                 spawning server
             </button>,
             this.renderPopup(),
@@ -44,24 +45,25 @@ class SpawnServerButton extends PureComponent {
         if (lobby.state !== STATE.WAITING) return null;
 
         return (
-            <Popup key="spawnServerPopup" title="Min. player conidition met" onClose={this.handleClose}>
-                Please confirm that you are ready to launch the server
-                <div>
-                    <form className="inline" action={`/lobby/${lobby.id}`} method="POST">
+            <Popup
+                key="spawnServerPopup"
+                title="Min. player conidition met"
+                onClose={this.handleClose}
+            >
+                <form className="inline" action={`/lobby/${lobby.id}`} method="POST">
+                    Please confirm that you are ready to launch the server
+                    <div className="popup-footer">
                         <CsrfToken {...props} />
                         <input type="hidden" name="action" value="changeState" />
                         <input type="hidden" name="newState" value="1" />
-                        <div className="buttonLine">
-                            <button type="submit">confirm</button>
-                            <button type="button" onClick={this.handleClose}>
-                                abort
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                        <button type="submit">confirm</button>
+                        <button type="button" onClick={this.handleClose}>
+                            abort
+                        </button>
+                    </div>
+                </form>
             </Popup>
         );
-
     }
 
     handleShow() {
@@ -70,7 +72,6 @@ class SpawnServerButton extends PureComponent {
     handleClose() {
         this.setState({ show: false });
     }
-
 }
 
 export default SpawnServerButton;

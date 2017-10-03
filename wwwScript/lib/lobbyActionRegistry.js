@@ -11,7 +11,9 @@ const mainAction = props => {
         if (participatingLobby.id !== lobby.id) return null;
 
         if (lobby.userId === user.id) {
-            return <LobbyActionButton key="destroy" {...props} className="danger" action="destroy" />;
+            return (
+                <LobbyActionButton key="destroy" {...props} className="danger" action="destroy" />
+            );
         }
         if (lobby.users.some(userId => userId === user.id)) {
             return <LobbyActionButton key="leave" {...props} action="leave" />;
