@@ -1,0 +1,11 @@
+<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 16 16" height="80" width="80">
+  <!-- L -->
+  <path d="M0 4 L0 12 L5.5 12 L5.5 9 L2 9 L3 4 Z" fill="black" />
+  <!-- N -->
+  <path d="M8 12 L10 4 L13 4 L13.5 6 L14 4 L17 4 L15 12 L12 12 L11.5 10 L11 12 " />
+
+  <!-- 4 -->
+  <path d="M4 12 L4 10 L7.5 4 L10 4 L10 12 L8 12 L8 7.5 L5.5 12" fill="green" />
+  <path d="M5.5 12 L11 9.5 L11 7.5 L10 8 L6 9.8 Z" fill="green" />
+</svg>

@@ -32,7 +32,7 @@ class Notifier {
 
         const notification = new Notification(title, {
             body,
-            icon: '/static/svg/logo.svg',
+            icon: '/logo.png',
             requireInteraction: true,
         });
         notification.addEventListener('click', () => {
