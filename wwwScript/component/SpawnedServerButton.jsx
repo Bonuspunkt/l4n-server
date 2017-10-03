@@ -57,7 +57,7 @@ class SpawnedServerButton extends PureComponent {
                     <CsrfToken {...props} />
                     <input type="hidden" name="action" value="changeState" />
                     <input type="hidden" name="newState" value="2" />
-                    <CommonMarkInput defaultValue={joinInfo} />
+                    <CommonMarkInput name="privateInfo" defaultValue={joinInfo} />
                     <div className="buttonLine">
                         <button type="submit">inform users</button>
                         <button type="button" onClick={this.handleClose}>
