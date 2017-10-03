@@ -47,14 +47,12 @@ function hookup(resolve) {
         });
     });
 
-    lobbyRepo.on('state', ({ lobbyId, state: lobbyState }) => {
-        debug(`lobby ${lobbyId} state changed to ${lobbyState}`);
+    lobbyRepo.on('update', ({ id, ...patch }) => {
+        debug(`lobby ${id} changes ${JSON.stringify(patch)}`);
 
         publicStore.dispatch(state => ({
             ...state,
-            lobbies: state.lobbies.map(
-                lobby => (lobby.id === lobbyId ? { ...lobby, state: lobbyState } : lobby),
-            ),
+            lobbies: state.lobbies.map(lobby => (lobby.id === id ? { ...lobby, ...patch } : lobby)),
         }));
     });
 
