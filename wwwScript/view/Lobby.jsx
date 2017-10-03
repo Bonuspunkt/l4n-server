@@ -8,7 +8,7 @@ import LobbyUsers from '../component/LobbyUsers';
 import CommonMark from '../component/CommonMark';
 
 const Lobby = props => {
-    const { lobbyId, lobbies } = props;
+    const { lobbyId, lobbies, user } = props;
 
     const lobby = lobbies.find(l => l.id === lobbyId);
     if (!lobby) {
@@ -18,6 +18,11 @@ const Lobby = props => {
             </DefaultLayout>
         );
     }
+
+    const privateInfoEl =
+        lobby.users.includes(user.id) && lobby.privateInfo ? (
+            <CommonMark text={lobby.privateInfo} />
+        ) : null;
 
     return (
         <DefaultLayout {...props} title={`lobby - ${lobby.name}`}>
@@ -37,6 +42,7 @@ const Lobby = props => {
                     readOnly
                 />
             </label>
+            {privateInfoEl}
             <LobbyUsers {...props} lobby={lobby} />
             <CommonMark text={lobby.publicInfo} />
         </DefaultLayout>
