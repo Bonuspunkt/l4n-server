@@ -3,8 +3,8 @@ import Header from '../../component/Header';
 import Title from '../../component/Title';
 
 const DefaultLayout = props => {
-    let { title, user } = props;
-    const usedTitle = 'l4n.at' + (title ? ` - ${title}` : '');
+    let { lanName, title, user } = props;
+    const usedTitle = (title ? `${title} - ` : '') + lanName;
 
     if (process.env.BROWSER) {
         return (
@@ -26,6 +26,8 @@ const DefaultLayout = props => {
             <head>
                 <title>{usedTitle}</title>
                 <link rel="stylesheet" href="/stylesheet.css" type="text/css" />
+                <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+                <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </head>
