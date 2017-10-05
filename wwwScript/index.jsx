@@ -1,5 +1,4 @@
 import 'babel-polyfill';
-import 'webrtc-adapter';
 import './core.styl';
 
 import Store from 'repatch';
