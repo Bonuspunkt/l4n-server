@@ -6,9 +6,9 @@ viewRegistry.register('home', OpenLobbies);
 import React from 'react';
 import lobbyActionRegistry from './lib/lobbyActionRegistry';
 import SpawnServerButton from './component/SpawnServerButton';
-import SpawnedServerButton from './component/SpawnedServerButton';
+import ServerReadyButton from './component/ServerReadyButton';
 lobbyActionRegistry.register(props => <SpawnServerButton key="spawnServer" {...props} />);
-lobbyActionRegistry.register(props => <SpawnedServerButton key="spawnedServer" {...props} />);
+lobbyActionRegistry.register(props => <ServerReadyButton key="serverReady" {...props} />);
 
 import Home from './view/Home';
 import Register from './view/Register';
