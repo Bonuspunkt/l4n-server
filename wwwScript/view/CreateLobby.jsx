@@ -21,7 +21,7 @@ const CreateLobby = props => {
     return (
         <DefaultLayout {...props} title={'Create Lobby'}>
             <h1>create lobby</h1>
-            <form method="POST" action="/lobby/custom">
+            <form method="POST" action="/lobby">
                 <CsrfToken {...props} />
                 <input type="hidden" name="userId" value={user.id} />
                 <label className="formField">

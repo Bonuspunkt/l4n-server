@@ -41,7 +41,7 @@ const routes = [
         Component: Registered,
     },
     {
-        pattern: '/lobby/custom',
+        pattern: '/lobby',
         Component: CreateLobby,
     },
     {

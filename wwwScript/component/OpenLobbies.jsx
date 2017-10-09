@@ -54,7 +54,7 @@ const OpenNewLobby = ({ lobbies, user }) => {
     if (inLobby) return null;
 
     return (
-        <a className="button" href="/lobby/custom">
+        <a className="button" href="/lobby">
             Open Lobby
         </a>
     );
