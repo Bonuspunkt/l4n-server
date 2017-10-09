@@ -21,7 +21,7 @@ const Lobby = props => {
 
     const privateInfoEl =
         lobby.users.includes(user.id) && lobby.privateInfo ? (
-            <CommonMark text={lobby.privateInfo} />
+            <CommonMark className="privateInfo" text={lobby.privateInfo} />
         ) : null;
 
     return (

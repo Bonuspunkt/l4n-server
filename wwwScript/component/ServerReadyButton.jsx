@@ -55,7 +55,7 @@ class ServerReadyButton extends PureComponent {
             <form className="inline" action={`/lobby/${id}`} method="POST">
                 <CsrfToken {...props} />
                 <input type="hidden" name="popup" value="serverReady" />
-                <button type="submit" disabled={disabled}>
+                <button type="submit" data-action="serverReady" disabled={disabled}>
                     server ready
                 </button>
             </form>
