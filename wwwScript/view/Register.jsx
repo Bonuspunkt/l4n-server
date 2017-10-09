@@ -23,15 +23,15 @@ const Register = props => {
                 <CsrfToken {...props} />
                 <label className="formField">
                     <span className="formField-label">Username</span>
-                    <input className="formField-input" type="text" name="username" />
+                    <input className="formField-input" type="text" name="username" required />
                 </label>
                 <label className="formField">
                     <span className="formField-label">Password</span>
-                    <input className="formField-input" type="password" name="password1" />
+                    <input className="formField-input" type="password" name="password1" required />
                 </label>
                 <label className="formField">
                     <span className="formField-label">Verify Password</span>
-                    <input className="formField-input" type="password" name="password2" />
+                    <input className="formField-input" type="password" name="password2" required />
                 </label>
                 <label className="formField">
                     <span className="formField-label" />

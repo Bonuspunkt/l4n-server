@@ -32,12 +32,18 @@ const Lobby = props => {
 
             <label className="formField">
                 <span className="formField-label">Status</span>
-                <input className="formField-input" value={LobbyState({ lobby })} readOnly />
+                <input
+                    className="formField-input"
+                    name="status"
+                    value={LobbyState({ lobby })}
+                    readOnly
+                />
             </label>
             <label className="formField">
                 <span className="formField-label">Players</span>
                 <input
                     className="formField-input"
+                    name="players"
                     value={`${lobby.users.length} / ${lobby.minPlayers}-${lobby.maxPlayers}`}
                     readOnly
                 />
