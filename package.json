@@ -23,7 +23,7 @@
     "express-session": "^1.15.6",
     "express-ws": "^3.0.0",
     "extract-text-webpack-plugin": "^3.0.1",
-    "fast-json-patch": "^2.0.5",
+    "json-diff-rfc6902": "^1.3.3",
     "jsonpatch": "^3.0.1",
     "l4n-common": "^0.0.0",
     "morgan": "^1.9.0",
@@ -97,8 +97,7 @@
   },
   "author": "Bonuspunkt",
   "directories": {
-    "lib": "lib",
-    "test": "test"
+    "lib": "lib"
   },
   "license": "MIT",
   "repository": {
@@ -108,5 +107,7 @@
   "bugs": {
     "url": "https://github.com/Bonuspunkt/l4n-server/issues"
   },
-  "homepage": "https://github.com/Bonuspunkt/l4n-server#readme"
+  "homepage": "https://github.com/Bonuspunkt/l4n-server#readme",
+  "description": "## install & setup - install [node.js](https://nodejs.org/) version 8+",
+  "keywords": []
 }
