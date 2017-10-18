@@ -6,7 +6,13 @@ const resolver = new Resolver();
 const settings = require('./settings');
 resolver.register('settings', () => settings);
 
-resolver.register('appView', () => require('./wwwScript/App').default);
+resolver.register('appView', () => {
+    if (process.env.NODE_ENV === 'production') return require('./wwwScript/App').default;
+
+    const appPath = require.resolve('./wwwScript/App');
+    delete require.cache[appPath];
+    return require(appPath).default;
+});
 
 const { use: plugins = [] } = settings;
 plugins.map(plugin => require(plugin)).forEach(plugin => plugin(resolver));
