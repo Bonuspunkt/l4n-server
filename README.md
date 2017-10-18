@@ -1,4 +1,5 @@
 # l4n server
+[![Build Status](https://travis-ci.org/Bonuspunkt/l4n-server.svg?branch=master)](https://travis-ci.org/Bonuspunkt/l4n-server)
 
 ## install & setup
 - install [node.js](https://nodejs.org/) version 8+
