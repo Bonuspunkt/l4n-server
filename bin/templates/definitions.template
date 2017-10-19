@@ -1,6 +1,6 @@
 $background = #fff
-$text = #333
 $background-alt = darken($background, 10%)
+$text = #333
 
 $color-bg = #bbb
 $color-text = #fff

@@ -124,6 +124,14 @@ function build() {
     debug(`writing webpack ${webpackPath}`);
     fs.writeFileSync(webpackPath, webpackContent);
 
+    // write definitions.styl
+    const definitionTemplatePath = path.resolve(__dirname, 'templates/definitions.template');
+    debug(`reading ${definitionTemplatePath}`);
+    const definitionTemplate = fs.readFileSync(definitionTemplatePath);
+    const definitionPath = path.resolve(cwd, 'wwwScript/definitions.js');
+    debug(`writing definitions ${definitionPath}`);
+    fs.writeFileSync(definitionPath, definitionTemplate);
+
     // write index.js
     const indexTemplatePath = path.resolve(__dirname, 'templates/index.template');
     debug(`reading ${indexTemplatePath}`);

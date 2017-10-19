@@ -17,6 +17,7 @@ const resolve = {
     alias: {
 ${aliases}
         '*routes': path.resolve(__dirname, 'wwwScript/routes.jsx'),
+        '*definitions': path.resolve(__dirname, 'wwwScript/definitions.styl'),
     },
     extensions: ['.js', '.jsx'],
     modules: ['node_modules'],
