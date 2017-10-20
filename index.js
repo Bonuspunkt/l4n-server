@@ -40,6 +40,6 @@ module.exports = ({ register, resolve }) => {
 
     app.get('*', renderView());
 
-    const { httpServer: { port = 8080 } } = resolve('settings');
-    app.listen(port);
+    const { httpServer: { port = 8080, host = '127.0.0.1' } } = resolve('settings');
+    app.listen(port, host);
 };
