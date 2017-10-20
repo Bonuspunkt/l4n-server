@@ -38,9 +38,7 @@ module.exports = ({ register, resolve }) => {
     require('./glue/storeToWebSocket')(resolve);
     require('./glue/webSocketToStore')(resolve);
 
-    // TODO: refactor, needs to be last route
     app.get('*', renderView());
-    // !!!
 
     const { httpServer: { port = 8080 } } = resolve('settings');
     app.listen(port);
