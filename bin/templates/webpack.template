@@ -2,10 +2,11 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MinifyPlugin = require('babel-minify-webpack-plugin');
 
 const outputPath = path.resolve(__dirname, 'wwwRoot');
 
-const isDebug = process.argv.includes('-d');
+const isDebug = process.env.NODE_ENV !== 'production';
 
 const exclude = module => {
     return /node_modules[\\/]l4n-/.test(module)
@@ -24,7 +25,8 @@ ${aliases}
     symlinks: false,
 };
 
-module.exports = [{
+
+const web = {
     entry: path.resolve(__dirname, 'wwwScript/main.jsx'),
     output: {
         path: path.resolve(__dirname, 'wwwRoot'),
@@ -39,7 +41,7 @@ module.exports = [{
                 query: {
                     presets: [
                         require('babel-preset-react'),
-                        require('babel-preset-env')
+                        require('babel-preset-env'),
                     ],
                     plugins: [
                         // still stage 3, will hopefully be soon included in env
@@ -64,7 +66,13 @@ module.exports = [{
         }),
         new ExtractTextPlugin('stylesheet.css', { allChunks: true }),
     ],
-}, {
+};
+
+if (!isDebug) {
+    web.plugins.push(new MinifyPlugin({}, {}))
+}
+
+const server = {
     entry: path.resolve(__dirname, 'node_modules/l4n-server/wwwScript/App.jsx'),
     output: {
         path: path.resolve(__dirname, 'wwwScript'),
@@ -107,4 +115,6 @@ module.exports = [{
         new ExtractTextPlugin('stylesheet.css', { allChunks: true }),
     ],
 
-}];
+};
+
+module.exports = [web, server];
