@@ -128,7 +128,7 @@ function build() {
     const definitionTemplatePath = path.resolve(__dirname, 'templates/definitions.template');
     debug(`reading ${definitionTemplatePath}`);
     const definitionTemplate = fs.readFileSync(definitionTemplatePath);
-    const definitionPath = path.resolve(cwd, 'wwwScript/definitions.js');
+    const definitionPath = path.resolve(cwd, 'wwwScript/definitions.styl');
     debug(`writing definitions ${definitionPath}`);
     fs.writeFileSync(definitionPath, definitionTemplate);
 
